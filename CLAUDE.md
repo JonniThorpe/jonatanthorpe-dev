@@ -21,12 +21,12 @@ Rellena los `<...>` a medida que se creen. No inventes valores.
 
 ```
 DOMINIO          = jonatanthorpe.dev      # ya registrado en Porkbun
-SERVIDOR_IP      = <pendiente: tras crear el VPS>
+SERVIDOR_IP      = 167.235.151.15
 SSH_USER         = deploy                 # usuario no-root que crearemos
 SSH_PORT         = 22                      # (endurecible más tarde)
-HETZNER_REGION   = Falkenstein (fsn1)      # menor latencia desde España
+HETZNER_REGION   = Nuremberg (nbg1)        # CX23 sin stock en Falkenstein; nbg1 misma latencia (Alemania)
 SO               = Ubuntu 24.04 LTS
-GITHUB_REPO      = <pendiente>
+GITHUB_REPO      = JonniThorpe/jonatanthorpe-dev
 ```
 
 ---
@@ -35,7 +35,7 @@ GITHUB_REPO      = <pendiente>
 
 Estas están cerradas tras una fase de planificación. No las cuestiones salvo que aparezca un bloqueante técnico real:
 
-- **Hosting:** VPS **Hetzner CX22** (2 vCPU / 4 GB / 40 GB, x86), Ubuntu 24.04 LTS.
+- **Hosting:** VPS **Hetzner CX23** (2 vCPU / 4 GB / 40 GB, x86), Ubuntu 24.04 LTS. (El "CX22" del plan original se renombró a CX23 en Hetzner; mismas specs. Creado en Nuremberg por falta de stock en Falkenstein.)
 - **Registrador / DNS:** dominio en **Porkbun**, nameservers apuntando al VPS (sin lock-in).
 - **Web server:** **nginx**, configurado a mano.
 - **TLS:** **Let's Encrypt** vía certbot, renovación automática.
