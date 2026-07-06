@@ -14,8 +14,8 @@ export default function About() {
           className="about__photo"
           src={profile.photo.src}
           alt={profile.photo.alt}
-          width="480"
-          height="600"
+          width="612"
+          height="821"
           loading="lazy"
         />
         <div className="about__body">
