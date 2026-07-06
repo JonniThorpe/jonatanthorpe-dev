@@ -1,0 +1,62 @@
+name: Deploy to VPS
+
+# Despliegue de Fase 2: en cada push a main que toque el sitio, se construye
+# el estatico y se sincroniza al VPS por SSH. Equivale a infra/scripts/deploy.sh
+# pero automatico. Unico secreto necesario: SSH_PRIVATE_KEY (la clave deploy_ci).
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "site/**"
+      - ".github/workflows/deploy.yml"
+  workflow_dispatch: {} # permite lanzarlo a mano desde la pestana Actions
+
+# Evita despliegues solapados si se empujan varios commits seguidos.
+concurrency:
+  group: deploy-production
+  cancel-in-progress: false
+
+env:
+  SSH_HOST: 167.235.151.15
+  SSH_USER: deploy
+  WEB_ROOT: /var/www/jonatanthorpe.dev
+  # Huella del host fijada (no es secreta): evita MITM en el primer contacto.
+  KNOWN_HOSTS: "167.235.151.15 ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIBOGZSjgc/uQYEwE+as6kVBEq6Odg9ZA7TIIyrylHiNX"
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: npm
+          cache-dependency-path: site/package-lock.json
+
+      - name: Install dependencies
+        working-directory: site
+        run: npm ci
+
+      - name: Build
+        working-directory: site
+        run: npm run build
+
+      - name: Setup SSH
+        run: |
+          mkdir -p ~/.ssh
+          chmod 700 ~/.ssh
+          echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/deploy_ci
+          chmod 600 ~/.ssh/deploy_ci
+          echo "$KNOWN_HOSTS" > ~/.ssh/known_hosts
+          chmod 644 ~/.ssh/known_hosts
+
+      - name: Deploy (rsync dist -> VPS)
+        run: |
+          rsync -avz --delete \
+            -e "ssh -i ~/.ssh/deploy_ci -o IdentitiesOnly=yes" \
+            site/dist/ "$SSH_USER@$SSH_HOST:$WEB_ROOT/"
