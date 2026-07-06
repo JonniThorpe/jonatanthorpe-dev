@@ -1,0 +1,144 @@
+.xp {
+  position: relative;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+/* Central vertical line */
+.xp::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  width: 2px;
+  transform: translateX(-50%);
+  background: var(--color-border);
+}
+
+.xp__item {
+  position: relative;
+  width: 50%;
+  box-sizing: border-box;
+  margin-bottom: var(--space-6);
+}
+
+.xp__item:last-child { margin-bottom: 0; }
+
+.xp__item--left {
+  left: 0;
+  padding-right: var(--space-8);
+}
+
+.xp__item--right {
+  left: 50%;
+  padding-left: var(--space-8);
+}
+
+/* Node on the central line */
+.xp__marker {
+  position: absolute;
+  top: 22px;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: var(--color-accent);
+  border: 3px solid var(--color-bg);
+  box-shadow: 0 0 0 1px var(--color-border);
+  z-index: 1;
+}
+
+.xp__item--left .xp__marker { right: -7px; }
+.xp__item--right .xp__marker { left: -7px; }
+
+/* Accent the open node */
+.xp__item.is-open .xp__marker { background: var(--color-accent-secondary); }
+
+.xp__card {
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  background: var(--color-bg);
+  overflow: hidden;
+  transition: box-shadow var(--duration-base) var(--ease-standard),
+              border-color var(--duration-base) var(--ease-standard);
+}
+
+.section:nth-of-type(even) .xp__card { background: var(--color-surface); }
+
+.xp__item.is-open .xp__card {
+  border-color: var(--color-accent);
+  box-shadow: var(--shadow-lift);
+}
+
+.xp__head {
+  display: grid;
+  grid-template-columns: 44px 1fr auto;
+  align-items: center;
+  gap: var(--space-3);
+  width: 100%;
+  padding: var(--space-4);
+  text-align: left;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: inherit;
+  font: inherit;
+}
+
+.xp__logo {
+  width: 44px;
+  height: 44px;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--color-border);
+  object-fit: cover;
+  background: var(--color-surface);
+}
+
+.xp__heading { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+
+.xp__role {
+  font-family: var(--font-display);
+  font-weight: var(--weight-semibold);
+  font-size: var(--text-base);
+}
+
+.xp__company { color: var(--color-accent); font-weight: var(--weight-medium); }
+
+.xp__meta { color: var(--color-text-secondary); }
+
+.xp__chev {
+  color: var(--color-text-secondary);
+  transition: transform var(--duration-base) var(--ease-standard);
+}
+
+.xp__item.is-open .xp__chev { transform: rotate(180deg); color: var(--color-accent); }
+
+.xp__detail {
+  padding: 0 var(--space-4) var(--space-4);
+  color: var(--color-text-secondary);
+}
+
+.xp__detail p { max-width: 60ch; }
+
+/* ============================================================
+   Mobile — single left rail, no alternating
+   ============================================================ */
+@media (max-width: 768px) {
+  .xp::before { left: 7px; transform: none; }
+
+  .xp__item,
+  .xp__item--left,
+  .xp__item--right {
+    width: 100%;
+    left: 0;
+    padding-left: var(--space-6);
+    padding-right: 0;
+  }
+
+  .xp__item--left .xp__marker,
+  .xp__item--right .xp__marker {
+    left: 0;
+    right: auto;
+  }
+}
