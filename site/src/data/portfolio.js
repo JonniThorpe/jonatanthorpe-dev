@@ -118,9 +118,11 @@ export const experience = [
   },
 ]
 
+/* type: 'study' (accent-primary) | 'certification' (accent-secondary) */
 export const studies = [
   {
     id: 'degree',
+    type: 'study',
     qualification: 'BSc Computer Science (placeholder)',
     institution: 'University (placeholder)',
     dates: '2016 — 2020',
@@ -128,9 +130,26 @@ export const studies = [
   },
   {
     id: 'ml-specialisation',
+    type: 'study',
     qualification: 'ML / Data specialisation (placeholder)',
     institution: 'Institution (placeholder)',
     dates: '2021',
+    location: 'Online',
+  },
+  {
+    id: 'cloud-cert',
+    type: 'certification',
+    qualification: 'Cloud / DevOps certification (placeholder)',
+    institution: 'Certifying body (placeholder)',
+    dates: '2023',
+    location: 'Online',
+  },
+  {
+    id: 'ml-cert',
+    type: 'certification',
+    qualification: 'Machine Learning certification (placeholder)',
+    institution: 'Certifying body (placeholder)',
+    dates: '2022',
     location: 'Online',
   },
 ]
