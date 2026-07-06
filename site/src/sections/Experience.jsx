@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { ChevronDown } from 'lucide-react'
 import Section from '../components/Section.jsx'
-import { experience } from '../data/portfolio.js'
+import { useLang } from '../i18n/LanguageProvider.jsx'
 import './Experience.css'
 
 /* Experience — central vertical timeline with entries alternating left/right
@@ -9,12 +9,14 @@ import './Experience.css'
    any other. Newest first; the newest starts open. On mobile the timeline
    collapses to a single left-aligned rail (same click-to-expand behavior). */
 export default function Experience() {
+  const { content, ui } = useLang()
+  const experience = content.experience
   const [openId, setOpenId] = useState(experience[0]?.id ?? null)
 
   const toggle = (id) => setOpenId((cur) => (cur === id ? null : id))
 
   return (
-    <Section id="experience" eyebrow="Experience" title="Experience" wide>
+    <Section id="experience" eyebrow={ui.experience.eyebrow} title={ui.experience.title} wide>
       <ol className="xp">
         {experience.map((job, i) => {
           const isOpen = openId === job.id

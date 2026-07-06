@@ -1,22 +1,26 @@
-/* NOTE: LinkedIn/GitHub brand glyphs aren't in Lucide — using a generic
-   placeholder icon here; real brand icons arrive with the Stage-3 social set. */
 import { Mail, Contact as ContactIcon, FileDown } from 'lucide-react'
 import Section from '../components/Section.jsx'
-import { profile } from '../data/portfolio.js'
+import { useLang } from '../i18n/LanguageProvider.jsx'
 import './Contact.css'
 
 /* Contact — simple list: email, LinkedIn, CV download, open-to-remote line.
-   (Social icons also persist in the navbar — see global-functionality spec.) */
+   (Social links also persist in the navbar — see global-functionality spec.)
+   NOTE: LinkedIn/GitHub brand glyphs aren't in Lucide — using a generic
+   placeholder icon here; brand glyphs live in the navbar/footer socials. */
 export default function Contact() {
+  const { content, ui } = useLang()
+  const { profile } = content
+  const t = ui.contact
+
   const items = [
-    { icon: Mail, label: profile.email, href: `mailto:${profile.email}`, aria: 'Email' },
-    { icon: ContactIcon, label: 'LinkedIn', href: profile.social.linkedin, aria: 'LinkedIn profile', external: true },
-    { icon: FileDown, label: 'Download CV (PDF)', href: profile.cvUrl, aria: 'Download CV', download: true },
+    { icon: Mail, label: profile.email, href: `mailto:${profile.email}`, aria: t.email },
+    { icon: ContactIcon, label: 'LinkedIn', href: profile.social.linkedin, aria: t.linkedin, external: true },
+    { icon: FileDown, label: t.cv, href: profile.cvUrl, aria: t.cv, download: true },
   ]
 
   return (
-    <Section id="contact" eyebrow="Contact" title="Get in touch">
-      <p className="contact__lead">Open to remote / international roles. The fastest way to reach me:</p>
+    <Section id="contact" eyebrow={t.eyebrow} title={t.title}>
+      <p className="contact__lead">{t.lead}</p>
       <ul className="contact__list">
         {items.map((it) => {
           const Icon = it.icon

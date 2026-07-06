@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { Server, Layout, Cloud, Network, Database, FlaskConical, Users } from 'lucide-react'
 import Section from '../components/Section.jsx'
-import { skills } from '../data/portfolio.js'
+import { useLang } from '../i18n/LanguageProvider.jsx'
 import './Skills.css'
 
 /* Icon map for CATEGORY headers only (Backend, Frontend, …). */
@@ -22,18 +22,20 @@ const ICONS = { Server, Layout, Cloud, Network, Database, FlaskConical, Users }
 /* Skills — multi-column icon-grid grouped by category, with a filter that
    isolates one category (click again / "All" to reset). */
 export default function Skills() {
+  const { content, ui } = useLang()
+  const skills = content.skills
   const [active, setActive] = useState('all')
   const shown = active === 'all' ? skills : skills.filter((g) => g.category === active)
 
   return (
-    <Section id="skills" eyebrow="Skills" title="Skills" wide>
-      <div className="skills__filter" role="group" aria-label="Filter skills by category">
+    <Section id="skills" eyebrow={ui.skills.eyebrow} title={ui.skills.title} wide>
+      <div className="skills__filter" role="group" aria-label={ui.skills.filterLabel}>
         <button
           className={`chip${active === 'all' ? ' is-active' : ''}`}
           onClick={() => setActive('all')}
           aria-pressed={active === 'all'}
         >
-          All
+          {ui.skills.all}
         </button>
         {skills.map((g) => (
           <button

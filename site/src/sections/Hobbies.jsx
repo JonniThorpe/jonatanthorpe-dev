@@ -1,13 +1,9 @@
-import { useState } from 'react'
+import { useMemo, useState } from 'react'
 import Section from '../components/Section.jsx'
-import { hobbies } from '../data/portfolio.js'
+import { useLang } from '../i18n/LanguageProvider.jsx'
 import './Hobbies.css'
 
-const categories = Object.keys(hobbies)          // ['Books', 'Podcasts', 'Sport']
-
-/* Fisher-Yates shuffle — randomizes the strip order. Computed once at module
-   load, so the order is different on each visit but stable across re-renders
-   (tab switches don't reshuffle / jump the strip). */
+/* Fisher-Yates shuffle — randomizes the strip order. */
 function shuffle(items) {
   const a = [...items]
   for (let i = a.length - 1; i > 0; i--) {
@@ -17,19 +13,17 @@ function shuffle(items) {
   return a
 }
 
-const allItems = shuffle(Object.values(hobbies).flat()) // every hobby, random order
-
 /* Infinite marquee of EVERY hobby cover. Two identical halves + a -50%
    translate = a seamless loop with no visible reset (pauses on hover/focus,
    disabled under prefers-reduced-motion → manual scroll). The duplicate
    half is aria-hidden so it isn't announced twice. */
-function InfiniteStrip() {
+function InfiniteStrip({ items }) {
   return (
     <div className="hstrip__viewport">
-      <ul className="hstrip__track" style={{ '--count': allItems.length }}>
-        {allItems.concat(allItems).map((item, i) => (
-          <li className="hstrip__item" key={`${item.title}-${i}`} aria-hidden={i >= allItems.length ? 'true' : undefined}>
-            <figure className="cover" tabIndex={i >= allItems.length ? -1 : 0}>
+      <ul className="hstrip__track" style={{ '--count': items.length }}>
+        {items.concat(items).map((item, i) => (
+          <li className="hstrip__item" key={`${item.title}-${i}`} aria-hidden={i >= items.length ? 'true' : undefined}>
+            <figure className="cover" tabIndex={i >= items.length ? -1 : 0}>
               <img src={item.cover} alt={item.alt} loading="lazy" />
               <figcaption className="cover__title">{item.title}</figcaption>
             </figure>
@@ -43,13 +37,19 @@ function InfiniteStrip() {
 /* Hobbies — infinite showcase strip on top; category tabs (Books default)
    expand below into a static grid of that category's items with titles. */
 export default function Hobbies() {
+  const { content, ui } = useLang()
+  const hobbies = content.hobbies
+  const categories = Object.keys(hobbies)
+
+  // Random order, computed once per mount (stable across tab switches).
+  const allItems = useMemo(() => shuffle(Object.values(hobbies).flat()), [hobbies])
   const [active, setActive] = useState(categories[0])
 
   return (
-    <Section id="hobbies" eyebrow="Hobbies" title="Hobbies" wide>
-      <InfiniteStrip />
+    <Section id="hobbies" eyebrow={ui.hobbies.eyebrow} title={ui.hobbies.title} wide>
+      <InfiniteStrip items={allItems} />
 
-      <div className="htabs" role="tablist" aria-label="Hobby categories">
+      <div className="htabs" role="tablist" aria-label={ui.hobbies.categoriesLabel}>
         {categories.map((cat) => (
           <button
             key={cat}

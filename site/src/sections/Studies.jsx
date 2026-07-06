@@ -1,13 +1,16 @@
 import { GraduationCap, Award } from 'lucide-react'
 import Section from '../components/Section.jsx'
-import { studies } from '../data/portfolio.js'
+import { useLang } from '../i18n/LanguageProvider.jsx'
 import './Studies.css'
 
 /* Studies & certifications — simple card list (not a timeline).
    Studies use accent-primary, certifications use accent-secondary. */
 export default function Studies() {
+  const { content, ui } = useLang()
+  const studies = content.studies
+
   return (
-    <Section id="studies" eyebrow="Studies & certifications" title="Studies & certifications" wide>
+    <Section id="studies" eyebrow={ui.studies.eyebrow} title={ui.studies.title} wide>
       <ul className="studies">
         {studies.map((s) => {
           const Icon = s.type === 'certification' ? Award : GraduationCap

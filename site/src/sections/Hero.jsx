@@ -1,10 +1,13 @@
 import { Download, ArrowDown } from 'lucide-react'
-import { profile } from '../data/portfolio.js'
+import { useLang } from '../i18n/LanguageProvider.jsx'
 import './Hero.css'
 
 /* Hero — 5-second read: who, what, open-to-remote, two CTAs.
    Uses <h1> (single top-level heading for the page). */
 export default function Hero() {
+  const { content, ui } = useLang()
+  const { profile } = content
+
   return (
     <section id="hero" className="hero" aria-labelledby="hero-title">
       <div className="hero__inner">
@@ -15,10 +18,10 @@ export default function Hero() {
 
         <div className="hero__cta">
           <a className="btn btn--primary" href={profile.cvUrl} download>
-            Download CV <Download size={18} strokeWidth={1.75} />
+            {ui.hero.downloadCv} <Download size={18} strokeWidth={1.75} />
           </a>
           <a className="btn btn--ghost" href="#contact">
-            Contact <ArrowDown size={18} strokeWidth={1.75} />
+            {ui.hero.contact} <ArrowDown size={18} strokeWidth={1.75} />
           </a>
         </div>
       </div>
