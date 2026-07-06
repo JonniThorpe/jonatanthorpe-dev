@@ -1,0 +1,50 @@
+.hero {
+  min-height: min(88vh, 720px);
+  display: flex;
+  align-items: center;
+  padding-inline: var(--section-pad-x);
+  scroll-margin-top: var(--nav-height, 64px);
+}
+
+.hero__inner {
+  max-width: var(--content-max);
+  margin-inline: auto;
+  width: 100%;
+}
+
+.hero__eyebrow {
+  color: var(--color-accent-secondary);
+  margin-bottom: var(--space-4);
+}
+
+.hero__title {
+  font-size: var(--text-3xl);
+  line-height: var(--leading-tight);
+}
+
+.hero__role {
+  font-family: var(--font-display);
+  font-size: var(--text-lg);
+  font-weight: var(--weight-medium);
+  color: var(--color-accent);
+  margin-top: var(--space-3);
+}
+
+.hero__focus {
+  font-size: var(--text-md);
+  color: var(--color-text-secondary);
+  max-width: 54ch;
+  margin-top: var(--space-4);
+}
+
+.hero__cta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+  margin-top: var(--space-8);
+}
+
+@media (max-width: 640px) {
+  .hero__title { font-size: var(--text-2xl); }
+  .hero { min-height: 80vh; }
+}

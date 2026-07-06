@@ -1,17 +1,24 @@
-/* STAGE 1: showing the design-token preview instead of the placeholder
-   sections. The real section layout arrives in Stage 2 — at that point,
-   restore the section imports below and delete src/dev/StylePreview.jsx.
-
-   import Hero from './sections/Hero.jsx'
-   import About from './sections/About.jsx'
-   import Projects from './sections/Projects.jsx'
-   import Contact from './sections/Contact.jsx'
-*/
-import StylePreview from './dev/StylePreview.jsx'
+import Navbar from './components/Navbar.jsx'
+import ScrollProgress from './components/ScrollProgress.jsx'
+import { sections } from './config/sections.config.js'
+import './styles/layout.css'
 import './App.css'
 
+/* The page renders from sections.config: Navbar reads the same registry,
+   so section order and nav order can never drift apart. */
 function App() {
-  return <StylePreview />
+  return (
+    <>
+      <a className="skip-link" href="#main">Skip to content</a>
+      <ScrollProgress />
+      <Navbar />
+      <main id="main">
+        {sections.map(({ id, Component }) => (
+          <Component key={id} />
+        ))}
+      </main>
+    </>
+  )
 }
 
 export default App

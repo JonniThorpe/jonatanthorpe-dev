@@ -1,0 +1,110 @@
+/* ============================================================
+   Shared layout primitives — Stage 2
+   Section rhythm + reusable pieces built only from design tokens.
+   ============================================================ */
+
+.section {
+  padding-block: var(--section-pad-y);
+  padding-inline: var(--section-pad-x);
+  scroll-margin-top: var(--nav-height, 64px); /* anchor offset under sticky nav */
+}
+
+.section:nth-of-type(even) {
+  background: var(--color-surface);
+}
+
+.section__inner {
+  max-width: var(--content-max);
+  margin-inline: auto;
+}
+
+.section__inner--wide {
+  max-width: var(--content-wide);
+}
+
+.section__eyebrow {
+  color: var(--color-accent-secondary);
+  text-transform: uppercase;
+  margin-bottom: var(--space-2);
+}
+
+.section__title {
+  margin-bottom: var(--space-6);
+}
+
+.section__lead {
+  color: var(--color-text-secondary);
+  font-size: var(--text-md);
+  max-width: 60ch;
+  margin-bottom: var(--space-8);
+}
+
+/* ---- Reusable atoms -------------------------------------- */
+
+.tag {
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  letter-spacing: var(--tracking-wide);
+  color: var(--color-text-secondary);
+  background: var(--color-bg);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  padding: 2px var(--space-2);
+}
+
+.section:nth-of-type(even) .tag {
+  background: var(--color-surface);
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--space-3) var(--space-5);
+  font-family: var(--font-body);
+  font-size: var(--text-base);
+  font-weight: var(--weight-medium);
+  border-radius: var(--radius-md);
+  border: 1px solid transparent;
+  cursor: pointer;
+  text-decoration: none;
+  transition: transform var(--duration-fast) var(--ease-standard),
+              background var(--duration-base) var(--ease-standard),
+              color var(--duration-base) var(--ease-standard),
+              border-color var(--duration-base) var(--ease-standard);
+}
+
+.btn:hover { transform: translateY(-1px); }
+
+.btn--primary {
+  background: var(--color-accent);
+  color: var(--color-accent-contrast);
+}
+
+.btn--primary:hover { color: var(--color-accent-contrast); }
+
+.btn--ghost {
+  background: transparent;
+  color: var(--color-accent);
+  border-color: var(--color-border);
+}
+
+.btn--ghost:hover { border-color: var(--color-accent); color: var(--color-accent); }
+
+/* ---- Scroll entrance (fade-up) --------------------------- */
+.reveal {
+  opacity: 0;
+  transform: translateY(16px);
+  transition: opacity var(--duration-slow) var(--ease-out),
+              transform var(--duration-slow) var(--ease-out);
+}
+
+.reveal.is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal { opacity: 1; transform: none; transition: none; }
+}
