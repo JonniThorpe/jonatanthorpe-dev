@@ -101,8 +101,14 @@ Avanza **una fase a la vez**. No empieces la siguiente sin que la actual cumpla 
 - *DoD:* un push a `main` publica cambios sin tocar el servidor a mano.
 
 **Fase 3 — Dinámico (cuando se decida)**
-- Docker + docker-compose, nginx como reverse proxy hacia un backend.
-- *DoD:* por definir cuando llegue el caso de uso.
+- **Caso de uso acordado:** desplegar una **aplicación web propia de Jonatan en un subdominio** (`app.jonatanthorpe.dev` o el nombre que se elija), junto al portfolio. El portfolio es estático y NO necesita BD; se queda intocado.
+- Routing por **subdominio** (no subpath ni dominio aparte): nginx enruta por `server_name`, apex/www → portfolio estático, subdominio → contenedor de la app.
+- Docker + docker-compose, nginx como reverse proxy. BD (p. ej. Postgres) en su propio contenedor **solo si la app la necesita**. Implica: registro DNS nuevo en Porkbun (manual), cert TLS del subdominio, adaptar el CI para desplegar contenedores.
+- **Al retomar, el agente pregunta primero:** (1) ¿qué hace la app? (2) ¿hay código o se parte de cero? (3) ¿con qué stack (Node, Python, SPA+API, full-stack…)? — eso define la arquitectura concreta.
+- Detalle completo en `docs/fase3-plan.md`.
+- *DoD:* por definir al aterrizar el caso de uso concreto.
+
+> **Nota de orden:** antes de la Fase 3 queda pendiente construir el **contenido y estilo del portfolio** (hoy con placeholders). El diseño lo lleva Jonatan (§3/§8): el agente no impone estética ni framework CSS, parte de sus directrices.
 
 ---
 

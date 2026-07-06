@@ -1,7 +1,7 @@
 function Hero() {
   return (
     <section id="hero">
-      <h1>Jonatan Thorpe</h1>
+      <h1>Jonatan Thorpe Plaza</h1>
       <p>Placeholder del hero. Aquí va el titular principal.</p>
     </section>
   )
