@@ -58,7 +58,12 @@ export default function Projects() {
             </ul>
             <div className="featured__links">
               {fp.links.map((l) => (
-                <a key={l.label} className="btn btn--ghost" href={l.href}>
+                <a
+                  key={l.label}
+                  className="btn btn--ghost"
+                  href={l.href}
+                  {...(l.external ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
+                >
                   {l.label} <ExternalLink size={16} strokeWidth={1.75} />
                 </a>
               ))}

@@ -13,14 +13,13 @@ export const profile = {
   email: 'hello@jonatanthorpe.dev',
   cvUrl: '/cv/jonatan-thorpe-cv.pdf',
   photo: {
-    // Placeholder portrait — replace with real asset in Stage 4.
-    src: 'https://placehold.co/480x600/1F2023/9B9892?text=Portrait',
+    src: '/profile.jpg',
     alt: 'Portrait photo of Jonatan Thorpe',
   },
   social: {
-    linkedin: 'https://www.linkedin.com/in/placeholder',
+    linkedin: 'https://www.linkedin.com/in/jonatan-thorpe-plaza-2409861b4/',
     github: 'https://github.com/JonniThorpe',
-    instagram: 'https://www.instagram.com/placeholder',
+    instagram: 'https://www.instagram.com/jonnithorpe/',
   },
 }
 
@@ -53,8 +52,7 @@ export const featuredProject = {
     'Placeholder: source-grounded extraction to curb hallucinations',
   ],
   links: [
-    { label: 'Case study', href: '#' },
-    { label: 'Code', href: '#' },
+    { label: 'Live demo', href: 'https://tfg-sigma-five.vercel.app/', external: true },
   ],
 }
 
