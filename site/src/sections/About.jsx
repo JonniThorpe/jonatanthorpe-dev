@@ -1,11 +1,14 @@
 import Section from '../components/Section.jsx'
-import { about, profile } from '../data/portfolio.js'
+import { useLang } from '../i18n/LanguageProvider.jsx'
 import './About.css'
 
 /* About — image + text split (not text-only), personal voice. */
 export default function About() {
+  const { content, ui } = useLang()
+  const { about, profile } = content
+
   return (
-    <Section id="about" eyebrow="About" title="About me" wide>
+    <Section id="about" eyebrow={ui.about.eyebrow} title={ui.about.title} wide>
       <div className="about__grid">
         <img
           className="about__photo"

@@ -1,0 +1,66 @@
+/* Shared chrome controls: social links, LLM button, theme/language toggles.
+   Used in both the navbar and the footer. Tokens only. */
+
+/* ---- Social links ---- */
+.social-links { display: inline-flex; align-items: center; gap: var(--space-1); }
+
+.social-link {
+  display: inline-flex;
+  padding: var(--space-2);
+  color: var(--color-text-secondary);
+  border-radius: var(--radius-sm);
+  transition: color var(--duration-base) var(--ease-standard),
+              background var(--duration-base) var(--ease-standard);
+}
+
+.social-link:hover { color: var(--color-accent); background: var(--color-surface); }
+
+/* ---- LLM button ---- */
+.llm-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--space-2) var(--space-3);
+  font-family: var(--font-body);
+  font-size: var(--text-sm);
+  font-weight: var(--weight-medium);
+  color: var(--color-accent);
+  background: none;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  white-space: nowrap;
+  transition: border-color var(--duration-base) var(--ease-standard),
+              background var(--duration-base) var(--ease-standard);
+}
+
+.llm-btn:hover { border-color: var(--color-accent); background: var(--color-surface); }
+
+.llm-btn.is-copied {
+  color: var(--color-accent-contrast);
+  background: var(--color-accent);
+  border-color: var(--color-accent);
+}
+
+/* ---- Control buttons (theme / language) ---- */
+.ctl {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--space-2) var(--space-3);
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  letter-spacing: var(--tracking-wide);
+  color: var(--color-text-secondary);
+  background: none;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: border-color var(--duration-base) var(--ease-standard),
+              color var(--duration-base) var(--ease-standard);
+}
+
+.ctl:hover { border-color: var(--color-accent); color: var(--color-text); }
+
+.ctl--lang .is-active { color: var(--color-accent); font-weight: var(--weight-bold); }
+.ctl__sep { color: var(--color-border); }
