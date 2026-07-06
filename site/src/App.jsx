@@ -1,5 +1,6 @@
 import Navbar from './components/Navbar.jsx'
 import ScrollProgress from './components/ScrollProgress.jsx'
+import Footer from './components/Footer.jsx'
 import { sections } from './config/sections.config.js'
 import './styles/layout.css'
 import './App.css'
@@ -17,6 +18,7 @@ function App() {
           <Component key={id} />
         ))}
       </main>
+      <Footer />
     </>
   )
 }

@@ -1,61 +1,62 @@
-.hobbies {
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-8);
-}
-
-.roulette__label {
-  font-size: var(--text-base);
-  font-weight: var(--weight-semibold);
-  color: var(--color-accent);
-  margin-bottom: var(--space-4);
-}
-
-.roulette__viewport {
+/* ============================================================
+   Infinite showcase strip (all hobbies)
+   ============================================================ */
+.hstrip__viewport {
   overflow: hidden;
-  /* soft fade at both edges */
+  margin-bottom: var(--space-8);
   -webkit-mask-image: linear-gradient(to right, transparent, #000 6%, #000 94%, transparent);
   mask-image: linear-gradient(to right, transparent, #000 6%, #000 94%, transparent);
 }
 
-.roulette__track {
+.hstrip__track {
   display: flex;
   gap: var(--space-4);
   width: max-content;
   list-style: none;
   margin: 0;
   padding: var(--space-2) 0;
-  animation: roulette-scroll calc(var(--count) * 4s) linear infinite;
+  /* one full set = 50% of the track (items are duplicated) */
+  animation: hstrip-scroll calc(var(--count) * 3.2s) linear infinite;
 }
 
-/* Pause on hover or keyboard focus within the track */
-.roulette__viewport:hover .roulette__track,
-.roulette__track:focus-within {
-  animation-play-state: paused;
+.hstrip__viewport:hover .hstrip__track,
+.hstrip__track:focus-within { animation-play-state: paused; }
+
+.hstrip__item { flex: 0 0 auto; }
+
+@keyframes hstrip-scroll {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
 }
 
-.roulette__item { flex: 0 0 auto; }
+@media (prefers-reduced-motion: reduce) {
+  .hstrip__track { animation: none; }
+  .hstrip__viewport { overflow-x: auto; }
+}
 
-.roulette__figure {
+/* ============================================================
+   Shared cover frame (uniform size so the mixed strip reads evenly)
+   ============================================================ */
+.cover {
   position: relative;
   display: block;
   margin: 0;
   width: 140px;
+  aspect-ratio: 2 / 3;
   border-radius: var(--radius-md);
   overflow: hidden;
   border: 1px solid var(--color-border);
   background: var(--color-surface);
 }
 
-.roulette__figure img {
+.cover img {
   display: block;
   width: 100%;
   height: 100%;
-  aspect-ratio: 2 / 3;
   object-fit: cover;
 }
 
-.roulette__title {
+.cover__title {
   position: absolute;
   inset: auto 0 0 0;
   padding: var(--space-2) var(--space-3);
@@ -67,22 +68,74 @@
   transition: opacity var(--duration-base) var(--ease-standard);
 }
 
-.roulette__figure:hover .roulette__title,
-.roulette__figure:focus-visible .roulette__title { opacity: 1; }
+.cover:hover .cover__title,
+.cover:focus-visible .cover__title { opacity: 1; }
 
-@keyframes roulette-scroll {
-  from { transform: translateX(0); }
-  to   { transform: translateX(-50%); } /* half = one full set (items duplicated) */
+/* ============================================================
+   Category tabs
+   ============================================================ */
+.htabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  margin-bottom: var(--space-6);
 }
 
-/* Reduced motion: stop the marquee, let the user scroll manually instead */
-@media (prefers-reduced-motion: reduce) {
-  .roulette__track { animation: none; }
-  .roulette__viewport { overflow-x: auto; }
+.htab {
+  font-family: var(--font-mono);
+  font-size: var(--text-sm);
+  font-weight: var(--weight-medium);
+  letter-spacing: var(--tracking-wide);
+  color: var(--color-text-secondary);
+  background: var(--color-bg);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  padding: var(--space-2) var(--space-4);
+  cursor: pointer;
+  transition: background var(--duration-base) var(--ease-standard),
+              color var(--duration-base) var(--ease-standard),
+              border-color var(--duration-base) var(--ease-standard);
 }
 
-/* Square covers for podcasts/sport read fine with the 2/3 ratio too, but
-   nudge smaller on mobile */
+.section:nth-of-type(even) .htab { background: var(--color-surface); }
+
+.htab:hover { border-color: var(--color-accent); color: var(--color-text); }
+
+/* scoped to out-specify the even-section background override */
+.htabs .htab.is-active {
+  background: var(--color-accent);
+  color: var(--color-accent-contrast);
+  border-color: var(--color-accent);
+  font-weight: var(--weight-semibold);
+}
+
+/* ============================================================
+   Expanded grid for the selected category
+   ============================================================ */
+.hpanel { animation: hpanel-fade var(--duration-base) var(--ease-out); }
+
+@keyframes hpanel-fade { from { opacity: 0; } to { opacity: 1; } }
+@media (prefers-reduced-motion: reduce) { .hpanel { animation: none; } }
+
+.hgrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  gap: var(--space-5);
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.cover--static { width: 100%; }
+
+.hgrid__title {
+  margin-top: var(--space-2);
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  color: var(--color-text-secondary);
+}
+
 @media (max-width: 640px) {
-  .roulette__figure { width: 112px; }
+  .cover { width: 112px; }
+  .hgrid { grid-template-columns: repeat(auto-fill, minmax(104px, 1fr)); }
 }

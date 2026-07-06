@@ -46,5 +46,12 @@
 
 @media (max-width: 640px) {
   .hero__title { font-size: var(--text-2xl); }
-  .hero { min-height: 80vh; }
+  /* Top-align on mobile (no top navbar to balance against) so the hero
+     doesn't sit with a large empty gap above it. */
+  .hero {
+    min-height: auto;
+    align-items: flex-start;
+    padding-top: var(--space-8);
+    padding-bottom: var(--space-10);
+  }
 }

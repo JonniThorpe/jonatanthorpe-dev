@@ -204,6 +204,7 @@
 @media (max-width: 768px) {
   .nav { display: none; }
   .navm { display: block; }
-  /* keep page content clear of the fixed bottom bar */
-  #main { padding-bottom: var(--nav-height); }
+  /* keep ALL page content (incl. the footer, which is after <main>) clear
+     of the fixed bottom bar */
+  body { padding-bottom: var(--nav-height); }
 }

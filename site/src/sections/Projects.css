@@ -168,4 +168,7 @@
 @media (hover: none) {
   .proj-card__overlay, .featured__overlay { opacity: 1; }
   .featured__overlay { background: linear-gradient(to top, rgba(0,0,0,0.7), rgba(0,0,0,0) 70%); }
+  /* Drop the tagline from the image overlay — it overflows the short image
+     and is already shown in the card body below. Keep just the tags. */
+  .featured__overlay p { display: none; }
 }
