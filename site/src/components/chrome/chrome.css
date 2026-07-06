@@ -36,6 +36,12 @@
 
 .llm-btn:hover { border-color: var(--color-accent); background: var(--color-surface); }
 
+.llm-btn.is-copied {
+  color: var(--color-accent-contrast);
+  background: var(--color-accent);
+  border-color: var(--color-accent);
+}
+
 /* ---- Control buttons (theme / language) ---- */
 .ctl {
   display: inline-flex;

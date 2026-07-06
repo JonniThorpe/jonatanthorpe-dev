@@ -5,6 +5,8 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
+    "gen:llms": "node scripts/gen-llms.mjs",
+    "prebuild": "node scripts/gen-llms.mjs",
     "build": "vite build",
     "lint": "oxlint",
     "preview": "vite preview"
