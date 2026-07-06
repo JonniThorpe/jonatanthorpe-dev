@@ -1,1 +1,23 @@
-/* Estilos de la app. El diseño lo lleva Jonatan. */
+/* App-level layout. Design system lives in styles/tokens.css. */
+
+#main {
+  display: block;
+}
+
+/* Skip link — visible only when focused (keyboard) */
+.skip-link {
+  position: absolute;
+  left: var(--space-4);
+  top: -100px;
+  z-index: 200;
+  padding: var(--space-2) var(--space-4);
+  background: var(--color-accent);
+  color: var(--color-accent-contrast);
+  border-radius: var(--radius-sm);
+  transition: top var(--duration-base) var(--ease-standard);
+}
+
+.skip-link:focus {
+  top: var(--space-3);
+  color: var(--color-accent-contrast);
+}

@@ -1,0 +1,141 @@
+/* ============================================================
+   Infinite showcase strip (all hobbies)
+   ============================================================ */
+.hstrip__viewport {
+  overflow: hidden;
+  margin-bottom: var(--space-8);
+  -webkit-mask-image: linear-gradient(to right, transparent, #000 6%, #000 94%, transparent);
+  mask-image: linear-gradient(to right, transparent, #000 6%, #000 94%, transparent);
+}
+
+.hstrip__track {
+  display: flex;
+  gap: var(--space-4);
+  width: max-content;
+  list-style: none;
+  margin: 0;
+  padding: var(--space-2) 0;
+  /* one full set = 50% of the track (items are duplicated) */
+  animation: hstrip-scroll calc(var(--count) * 3.2s) linear infinite;
+}
+
+.hstrip__viewport:hover .hstrip__track,
+.hstrip__track:focus-within { animation-play-state: paused; }
+
+.hstrip__item { flex: 0 0 auto; }
+
+@keyframes hstrip-scroll {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hstrip__track { animation: none; }
+  .hstrip__viewport { overflow-x: auto; }
+}
+
+/* ============================================================
+   Shared cover frame (uniform size so the mixed strip reads evenly)
+   ============================================================ */
+.cover {
+  position: relative;
+  display: block;
+  margin: 0;
+  width: 140px;
+  aspect-ratio: 2 / 3;
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  border: 1px solid var(--color-border);
+  background: var(--color-surface);
+}
+
+.cover img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.cover__title {
+  position: absolute;
+  inset: auto 0 0 0;
+  padding: var(--space-2) var(--space-3);
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  color: #fff;
+  background: linear-gradient(to top, rgba(0,0,0,0.8), rgba(0,0,0,0));
+  opacity: 0;
+  transition: opacity var(--duration-base) var(--ease-standard);
+}
+
+.cover:hover .cover__title,
+.cover:focus-visible .cover__title { opacity: 1; }
+
+/* ============================================================
+   Category tabs
+   ============================================================ */
+.htabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  margin-bottom: var(--space-6);
+}
+
+.htab {
+  font-family: var(--font-mono);
+  font-size: var(--text-sm);
+  font-weight: var(--weight-medium);
+  letter-spacing: var(--tracking-wide);
+  color: var(--color-text-secondary);
+  background: var(--color-bg);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  padding: var(--space-2) var(--space-4);
+  cursor: pointer;
+  transition: background var(--duration-base) var(--ease-standard),
+              color var(--duration-base) var(--ease-standard),
+              border-color var(--duration-base) var(--ease-standard);
+}
+
+.section:nth-of-type(even) .htab { background: var(--color-surface); }
+
+.htab:hover { border-color: var(--color-accent); color: var(--color-text); }
+
+/* scoped to out-specify the even-section background override */
+.htabs .htab.is-active {
+  background: var(--color-accent);
+  color: var(--color-accent-contrast);
+  border-color: var(--color-accent);
+  font-weight: var(--weight-semibold);
+}
+
+/* ============================================================
+   Expanded grid for the selected category
+   ============================================================ */
+.hpanel { animation: hpanel-fade var(--duration-base) var(--ease-out); }
+
+@keyframes hpanel-fade { from { opacity: 0; } to { opacity: 1; } }
+@media (prefers-reduced-motion: reduce) { .hpanel { animation: none; } }
+
+.hgrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  gap: var(--space-5);
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.cover--static { width: 100%; }
+
+.hgrid__title {
+  margin-top: var(--space-2);
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  color: var(--color-text-secondary);
+}
+
+@media (max-width: 640px) {
+  .cover { width: 112px; }
+  .hgrid { grid-template-columns: repeat(auto-fill, minmax(104px, 1fr)); }
+}
