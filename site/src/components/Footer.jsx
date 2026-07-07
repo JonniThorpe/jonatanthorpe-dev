@@ -14,6 +14,10 @@ export default function Footer() {
       <div className="footer__inner">
         <p className="footer__copy">
           © {year} {content.profile.name}. {ui.footer.rights}
+          {' '}
+          <a href="https://commons.wikimedia.org" target="_blank" rel="noopener noreferrer" className="footer__credit">
+            {ui.footer.iconCredit}
+          </a>
         </p>
         <div className="footer__actions">
           <SocialLinks />

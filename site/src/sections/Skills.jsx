@@ -1,23 +1,29 @@
 import { useState } from 'react'
-import { Server, Layout, Cloud, Network, Database, FlaskConical, Users } from 'lucide-react'
+import { Code2, Layers, Brain, Database, Wrench, Workflow } from 'lucide-react'
 import Section from '../components/Section.jsx'
 import { useLang } from '../i18n/LanguageProvider.jsx'
+import { TECH_ICONS } from '../lib/techIcons.js'
 import './Skills.css'
 
-/* Icon map for CATEGORY headers only (Backend, Frontend, …). */
-const ICONS = { Server, Layout, Cloud, Network, Database, FlaskConical, Users }
+/* Icon map for CATEGORY headers only (Languages, Frameworks, …). */
+const ICONS = { Code2, Layers, Brain, Database, Wrench, Workflow }
 
-/* ── DEFERRED TO REAL-CONTENT STAGE (not placeholder) ─────────────────────
-   1. Per-technology brand icons: the spec wants a brand LOGO per individual
-      skill (React, Docker, PostgreSQL…). Lucide has no brand icons, so for
-      now each skill reuses its category icon as a neutral placeholder mark.
-      Real per-tech logos get added with the real skills data (brand source
-      e.g. simple-icons or inline SVGs, same approach as the navbar socials).
-   2. Skill accent bar (`.skill-item__bar`): currently a static full-width
-      bar — a visual placeholder. Its REAL VALUE (proficiency / level per
-      skill) will be defined together with the real skills content, then
-      drive the bar's fill.
-   Both are intentionally decoupled from layout and land when real info does. */
+/* Per-skill brand mark when one exists, else the category icon as a
+   neutral fallback (SQL, RunPod, JBoss, Unsloth, GWT, Mockito and a few
+   AI/ML terms have no logo in any icon set checked — see techIcons.js). */
+function SkillIcon({ name, CategoryIcon }) {
+  const brand = TECH_ICONS[name]
+  if (!brand) return <CategoryIcon size={16} strokeWidth={1.5} aria-hidden="true" className="skill-item__icon" />
+  return (
+    <svg
+      width={16} height={16} viewBox={brand.viewBox ?? '0 0 24 24'} fill="currentColor"
+      aria-hidden="true" focusable="false" className="skill-item__icon skill-item__icon--brand"
+      style={{ '--brand-hex': `#${brand.hex}` }}
+    >
+      <path d={brand.path} />
+    </svg>
+  )
+}
 
 /* Skills — multi-column icon-grid grouped by category, with a filter that
    isolates one category (click again / "All" to reset). */
@@ -51,7 +57,7 @@ export default function Skills() {
 
       <div className="skills__grid">
         {shown.map((group) => {
-          const Icon = ICONS[group.icon] ?? Server
+          const Icon = ICONS[group.icon] ?? Code2
           return (
             <div key={group.category} className="skill-group">
               <h3 className="skill-group__head">
@@ -60,12 +66,19 @@ export default function Skills() {
               </h3>
               <ul className="skill-group__list">
                 {group.items.map((item) => (
-                  <li key={item} className="skill-item">
-                    {/* placeholder icon (real per-tech logo) + placeholder bar
-                        (real proficiency value) come with real content — see note above */}
-                    <Icon size={16} strokeWidth={1.5} aria-hidden="true" className="skill-item__icon" />
-                    <span className="skill-item__label">{item}</span>
-                    <span className="skill-item__bar" aria-hidden="true" />
+                  <li key={item.name} className="skill-item">
+                    <SkillIcon name={item.name} CategoryIcon={Icon} />
+                    <span className="skill-item__label">{item.name}</span>
+                    <span
+                      className="skill-item__bar"
+                      role="meter"
+                      aria-label={`${item.name} proficiency`}
+                      aria-valuenow={item.level}
+                      aria-valuemin={0}
+                      aria-valuemax={100}
+                    >
+                      <span className="skill-item__bar-fill" style={{ '--level': `${item.level}%` }} />
+                    </span>
                   </li>
                 ))}
               </ul>

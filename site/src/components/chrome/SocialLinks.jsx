@@ -5,7 +5,7 @@ import { profile } from '../../data/portfolio.js'
 /* Real outbound social links (open in a new tab). URLs come from
    profile.social — still placeholder values until real ones land in Stage 4,
    but the links themselves are live. */
-const ORDER = ['linkedin', 'instagram', 'github']
+const ORDER = ['linkedin', 'instagram', 'github', 'github2']
 
 export default function SocialLinks({ className }) {
   const { ui } = useLang()

@@ -19,6 +19,12 @@
   color: var(--color-text-secondary);
 }
 
+.footer__credit {
+  color: inherit;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
 /* Social + LLM styling lives in chrome/chrome.css */
 .footer__actions {
   display: flex;

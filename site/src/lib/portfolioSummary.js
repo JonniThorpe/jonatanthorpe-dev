@@ -20,6 +20,7 @@ export function buildMarkdown(content) {
   push(`- Email: ${profile.email}`)
   push(`- LinkedIn: ${profile.social.linkedin}`)
   push(`- GitHub: ${profile.social.github}`)
+  push(`- GitHub (alt): ${profile.social.github2}`)
   push('')
 
   // About
@@ -74,7 +75,7 @@ export function buildMarkdown(content) {
   // Skills
   push('## Skills')
   push('')
-  skills.forEach((g) => push(`- **${g.category}:** ${g.items.join(', ')}`))
+  skills.forEach((g) => push(`- **${g.category}:** ${g.items.map((i) => i.name).join(', ')}`))
   push('')
 
   // Hobbies
