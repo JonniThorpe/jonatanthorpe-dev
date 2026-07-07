@@ -3,26 +3,35 @@
    ============================================================ */
 .hstrip__viewport {
   overflow: hidden;
-  margin-bottom: var(--space-8);
+  /* extra vertical breathing room so a hovered tile can scale up
+     (see .cover:hover below) without being clipped by this viewport */
+  padding: var(--space-8) 0;
+  margin: calc(var(--space-8) * -1) 0 var(--space-4);
   -webkit-mask-image: linear-gradient(to right, transparent, #000 6%, #000 94%, transparent);
   mask-image: linear-gradient(to right, transparent, #000 6%, #000 94%, transparent);
 }
 
 .hstrip__track {
   display: flex;
-  gap: var(--space-4);
+  gap: var(--space-5);
   width: max-content;
   list-style: none;
   margin: 0;
-  padding: var(--space-2) 0;
-  /* one full set = 50% of the track (items are duplicated) */
-  animation: hstrip-scroll calc(var(--count) * 3.2s) linear infinite;
+  padding: 0;
+  /* duration set inline per current speed (Hobbies.jsx); this is just a
+     sane fallback if that ever fails to apply */
+  animation: hstrip-scroll 40s linear infinite;
 }
 
 .hstrip__viewport:hover .hstrip__track,
 .hstrip__track:focus-within { animation-play-state: paused; }
 
-.hstrip__item { flex: 0 0 auto; }
+.hstrip__item { flex: 0 0 auto; position: relative; }
+
+/* lift the hovered/focused tile's stacking above its neighbours once it
+   scales past the tile boundary */
+.hstrip__item:hover,
+.hstrip__item:focus-within { z-index: 2; }
 
 @keyframes hstrip-scroll {
   from { transform: translateX(0); }
@@ -35,18 +44,36 @@
 }
 
 /* ============================================================
-   Shared cover frame (uniform size so the mixed strip reads evenly)
+   Cover tile — square by default; hover/focus pops it bigger with a
+   springy overshoot ("water balloon" bounce) and swaps the image from
+   cropped to fully visible, revealing its real/native shape.
    ============================================================ */
 .cover {
   position: relative;
   display: block;
   margin: 0;
-  width: 140px;
-  aspect-ratio: 2 / 3;
+  width: 120px;
+  aspect-ratio: 1 / 1;
   border-radius: var(--radius-md);
   overflow: hidden;
   border: 1px solid var(--color-border);
   background: var(--color-surface);
+  transform: scale(1);
+  transform-origin: center;
+  transition: transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+  /* hint the browser to keep this layer crisp at the hover scale, instead
+     of rasterizing at 1x and blitting up (which softened the rounded
+     corners into near-square edges) */
+  will-change: transform;
+}
+
+.hstrip__item:hover .cover,
+.hstrip__item:focus-within .cover {
+  transform: scale(1.45);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cover { transition: none; }
 }
 
 .cover img {
@@ -56,86 +83,65 @@
   object-fit: cover;
 }
 
-.cover__title {
+.hstrip__item:hover .cover img,
+.hstrip__item:focus-within .cover img {
+  object-fit: contain;
+}
+
+.cover__caption {
   position: absolute;
   inset: auto 0 0 0;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
   padding: var(--space-2) var(--space-3);
-  font-family: var(--font-mono);
-  font-size: var(--text-xs);
-  color: #fff;
-  background: linear-gradient(to top, rgba(0,0,0,0.8), rgba(0,0,0,0));
+  background: linear-gradient(to top, rgba(0,0,0,0.85), rgba(0,0,0,0));
   opacity: 0;
   transition: opacity var(--duration-base) var(--ease-standard);
 }
 
-.cover:hover .cover__title,
-.cover:focus-visible .cover__title { opacity: 1; }
+.hstrip__item:hover .cover__caption,
+.hstrip__item:focus-within .cover__caption { opacity: 1; }
 
-/* ============================================================
-   Category tabs
-   ============================================================ */
-.htabs {
-  display: flex;
-  flex-wrap: wrap;
-  gap: var(--space-2);
-  margin-bottom: var(--space-6);
-}
-
-.htab {
+.cover__category {
   font-family: var(--font-mono);
-  font-size: var(--text-sm);
-  font-weight: var(--weight-medium);
+  font-size: 0.65rem;
   letter-spacing: var(--tracking-wide);
-  color: var(--color-text-secondary);
-  background: var(--color-bg);
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius-sm);
-  padding: var(--space-2) var(--space-4);
-  cursor: pointer;
-  transition: background var(--duration-base) var(--ease-standard),
-              color var(--duration-base) var(--ease-standard),
-              border-color var(--duration-base) var(--ease-standard);
+  text-transform: uppercase;
+  color: var(--color-accent-secondary);
 }
 
-.section:nth-of-type(even) .htab { background: var(--color-surface); }
-
-.htab:hover { border-color: var(--color-accent); color: var(--color-text); }
-
-/* scoped to out-specify the even-section background override */
-.htabs .htab.is-active {
-  background: var(--color-accent);
-  color: var(--color-accent-contrast);
-  border-color: var(--color-accent);
-  font-weight: var(--weight-semibold);
-}
-
-/* ============================================================
-   Expanded grid for the selected category
-   ============================================================ */
-.hpanel { animation: hpanel-fade var(--duration-base) var(--ease-out); }
-
-@keyframes hpanel-fade { from { opacity: 0; } to { opacity: 1; } }
-@media (prefers-reduced-motion: reduce) { .hpanel { animation: none; } }
-
-.hgrid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
-  gap: var(--space-5);
-  list-style: none;
-  margin: 0;
-  padding: 0;
-}
-
-.cover--static { width: 100%; }
-
-.hgrid__title {
-  margin-top: var(--space-2);
+.cover__title {
   font-family: var(--font-mono);
   font-size: var(--text-xs);
+  color: #fff;
+}
+
+/* ============================================================
+   Speed slider
+   ============================================================ */
+.hspeed {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
   color: var(--color-text-secondary);
 }
 
+.hspeed__label {
+  font-family: var(--font-mono);
+  font-size: var(--text-sm);
+}
+
+.hspeed input[type='range'] {
+  flex: 1;
+  max-width: 220px;
+  accent-color: var(--color-accent);
+}
+
+/* Bigger tiles + faster default loop on mobile (speed default is set in
+   Hobbies.jsx; this just covers the visual size). */
 @media (max-width: 640px) {
-  .cover { width: 112px; }
-  .hgrid { grid-template-columns: repeat(auto-fill, minmax(104px, 1fr)); }
+  .cover { width: 150px; }
+  .hstrip__item:hover .cover,
+  .hstrip__item:focus-within .cover { transform: scale(1.3); }
 }
