@@ -35,7 +35,7 @@ export const featuredProject = {
   name: 'Scannet',
   tagline: 'Document-intelligence pipeline that turns purchase receipts into structured data.',
   cover: {
-    src: 'https://placehold.co/960x540/2B4C43/FAFAF8?text=Scannet',
+    src: '/projects/Scannet.webp',
     alt: 'Screenshot of the Scannet document-processing interface',
   },
   stack: ['React', 'Vite', 'Supabase', 'DeepSeek-OCR2 (fine-tuned)', 'RunPod', 'Vercel'],
@@ -59,7 +59,7 @@ export const projects = [
   {
     id: 'ai-order-automation',
     name: 'AI Order Automation',
-    cover: { src: 'https://placehold.co/640x400/1F2023/9B9892?text=Orders', alt: 'AI order automation interface screenshot' },
+    cover: { src: '/projects/AutomatizacionIA.webp', alt: 'AI order automation interface screenshot' },
     summary: 'Turns informal WhatsApp order messages into structured orders automatically, using Twilio and a fine-tuned OCR worker on RunPod.',
     stack: ['Spring Boot', 'React', 'MySQL', 'Twilio API', 'JWT', 'Docker'],
     link: { label: 'Code', href: 'https://github.com/jtp703/PedidosTwilio/tree/Peidilio_Refactorizaci%C3%B3n_React' },
@@ -67,7 +67,7 @@ export const projects = [
   {
     id: 'online-store',
     name: 'Online Store',
-    cover: { src: 'https://placehold.co/640x400/2B4C43/FAFAF8?text=Store', alt: 'Online store project screenshot' },
+    cover: { src: '/projects/Eccomerce.webp', alt: 'Online store project screenshot' },
     summary: 'Full-stack e-commerce solution giving a local business its own online sales channel.',
     stack: ['Spring Boot', 'JSP', 'MySQL', 'Selenium (E2E)'],
     link: { label: 'Code', href: 'https://github.com/JonniThorpe/WebSalesAPP-JavaSpringBased' },
@@ -75,7 +75,7 @@ export const projects = [
   {
     id: 'english-academy',
     name: 'English Academy Web App',
-    cover: { src: 'https://placehold.co/640x400/2B4C43/FAFAF8?text=Academy', alt: 'English academy web application screenshot' },
+    cover: { src: '/projects/Academia.webp', alt: 'English academy web application screenshot' },
     summary: 'Tailor-made web application to digitalise the day-to-day management of a local English academy.',
     stack: ['C#', 'ASP.NET MVC', 'SQL Server'],
     link: { label: 'Code', href: 'https://github.com/JonniThorpe/AcademyWebAplication' },
@@ -83,7 +83,7 @@ export const projects = [
   {
     id: 'portfolio-infra',
     name: 'Self-hosted portfolio',
-    cover: { src: 'https://placehold.co/640x400/1F2023/9B9892?text=Infra', alt: 'Server infrastructure diagram screenshot' },
+    cover: { src: '/projects/Portfolio.webp', alt: 'Self-hosted portfolio screenshot' },
     summary: 'This site, provisioned, hardened and deployed on a bare VPS with nginx, TLS and a custom CI pipeline.',
     stack: ['nginx', 'Ubuntu', 'GitHub Actions'],
     link: { label: 'Code', href: 'https://github.com/JonniThorpe/jonatanthorpe-dev' },
