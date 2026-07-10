@@ -65,12 +65,12 @@ export const projects = [
     link: { label: 'Code', href: 'https://github.com/jtp703/PedidosTwilio/tree/Peidilio_Refactorizaci%C3%B3n_React' },
   },
   {
-    id: 'online-store',
-    name: 'Online Store',
-    cover: { src: '/projects/Eccomerce.webp', alt: 'Online store project screenshot' },
-    summary: 'Full-stack e-commerce solution giving a local business its own online sales channel.',
-    stack: ['Spring Boot', 'JSP', 'MySQL', 'Selenium (E2E)'],
-    link: { label: 'Code', href: 'https://github.com/JonniThorpe/WebSalesAPP-JavaSpringBased' },
+    id: 'portfolio-infra',
+    name: 'Self-hosted portfolio',
+    cover: { src: '/projects/Portfolio.webp', alt: 'Self-hosted portfolio screenshot' },
+    summary: 'This site, provisioned, hardened and deployed on a bare VPS with nginx, TLS and a custom CI pipeline.',
+    stack: ['nginx', 'Ubuntu', 'GitHub Actions'],
+    link: { label: 'Code', href: 'https://github.com/JonniThorpe/jonatanthorpe-dev' },
   },
   {
     id: 'english-academy',
@@ -81,12 +81,12 @@ export const projects = [
     link: { label: 'Code', href: 'https://github.com/JonniThorpe/AcademyWebAplication' },
   },
   {
-    id: 'portfolio-infra',
-    name: 'Self-hosted portfolio',
-    cover: { src: '/projects/Portfolio.webp', alt: 'Self-hosted portfolio screenshot' },
-    summary: 'This site, provisioned, hardened and deployed on a bare VPS with nginx, TLS and a custom CI pipeline.',
-    stack: ['nginx', 'Ubuntu', 'GitHub Actions'],
-    link: { label: 'Code', href: 'https://github.com/JonniThorpe/jonatanthorpe-dev' },
+    id: 'online-store',
+    name: 'Online Store',
+    cover: { src: '/projects/Eccomerce.webp', alt: 'Online store project screenshot' },
+    summary: 'Full-stack e-commerce solution giving a local business its own online sales channel.',
+    stack: ['Spring Boot', 'JSP', 'MySQL', 'Selenium (E2E)'],
+    link: { label: 'Code', href: 'https://github.com/JonniThorpe/WebSalesAPP-JavaSpringBased' },
   },
 ]
 

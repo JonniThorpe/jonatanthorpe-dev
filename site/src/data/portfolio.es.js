@@ -54,7 +54,7 @@ export const projects = [
     link: { label: 'Código', href: projectsEn[0].link.href },
   },
   {
-    ...projectsEn[1],
+    ...projectsEn[3],
     name: 'Tienda de Venta Online',
     summary: 'Solución de e-commerce full-stack que da a un negocio local su propio canal de venta online.',
     link: { label: 'Código', href: projectsEn[1].link.href },
@@ -66,7 +66,7 @@ export const projects = [
     link: { label: 'Código', href: projectsEn[2].link.href },
   },
   {
-    ...projectsEn[3],
+    ...projectsEn[1],
     name: 'Portfolio autoalojado',
     summary: 'Este sitio, provisionado, endurecido y desplegado en un VPS desnudo con nginx, TLS y un pipeline de CI propio.',
     link: { label: 'Código', href: projectsEn[3].link.href },
