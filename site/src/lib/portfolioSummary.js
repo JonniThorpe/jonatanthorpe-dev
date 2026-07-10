@@ -48,6 +48,8 @@ export function buildMarkdown(content) {
     push('')
     push(p.summary)
     push('')
+    if (p.need) push(`- Need: ${p.need}`)
+    if (p.idea) push(`- Idea: ${p.idea}`)
     push(`- Stack: ${p.stack.join(', ')}`)
     push('')
   })

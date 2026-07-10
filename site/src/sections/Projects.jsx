@@ -102,6 +102,14 @@ export default function Projects() {
             {openProject.stack.map((s) => <li key={s} className="tag">{s}</li>)}
           </ul>
           <p className="proj-modal__summary">{openProject.summary}</p>
+          {openProject.need && (
+            <>
+              <h4 className="case__head u-mono">{t.problem}</h4>
+              <p>{openProject.need}</p>
+              <h4 className="case__head u-mono">{t.approach}</h4>
+              <p>{openProject.idea}</p>
+            </>
+          )}
           <a className="btn btn--primary" href={openProject.link.href} target="_blank" rel="noopener noreferrer">
             {openProject.link.label} <ExternalLink size={16} strokeWidth={1.75} />
           </a>

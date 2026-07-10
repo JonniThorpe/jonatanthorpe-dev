@@ -16,7 +16,7 @@ export const profile = {
   ...profileEn,
   role: 'Ingeniero Informático · Desarrollo de Software · IA/ML',
   focus: 'Ingeniero backend con experiencia en desarrollo de productos full-stack, con experiencia práctica en fine-tuning de modelos de lenguaje y visión para problemas reales de negocio.',
-  cvUrl: '/cv/jonatan-thorpe-cv-es.pdf',
+  cvUrl: '/cv/CV_Jonatan_Thorpe_ATS_ES.pdf',
 }
 
 export const about = {
@@ -50,25 +50,33 @@ export const projects = [
   {
     ...projectsEn[0],
     name: 'Automatización de Pedidos con IA',
-    summary: 'Convierte mensajes informales de pedidos por WhatsApp en pedidos estructurados de forma automática, usando Twilio y un worker de OCR afinado en RunPod.',
+    summary: 'Convierte mensajes informales de pedidos por WhatsApp en pedidos estructurados de forma automática, usando la API de WhatsApp Web y DeepSeek para la categorización.',
+    need: 'Los pedidos llegaban como mensajes informales de WhatsApp y requerían transcripción manual.',
+    idea: 'Capturar los mensajes con la API de WhatsApp Web (Meta) y usar la API de DeepSeek para categorizar e interpretar el lenguaje natural, generando pedidos estructurados de forma automática.',
     link: { label: 'Código', href: projectsEn[0].link.href },
   },
   {
     ...projectsEn[3],
     name: 'Tienda de Venta Online',
     summary: 'Solución de e-commerce full-stack que da a un negocio local su propio canal de venta online.',
+    need: 'Dar a un negocio local su propio canal de venta online.',
+    idea: 'Construir una solución de e-commerce full-stack para un pequeño negocio local.',
     link: { label: 'Código', href: projectsEn[1].link.href },
   },
   {
     ...projectsEn[2],
     name: 'Aplicación Web para Academia de Inglés',
     summary: 'Aplicación web a medida para digitalizar la gestión diaria de una academia de inglés local.',
+    need: 'Una academia de inglés local necesitaba digitalizar la gestión de su actividad.',
+    idea: 'Abordar las necesidades reales de negocio de una empresa local con una aplicación web a medida.',
     link: { label: 'Código', href: projectsEn[2].link.href },
   },
   {
     ...projectsEn[1],
     name: 'Portfolio autoalojado',
     summary: 'Este sitio, provisionado, endurecido y desplegado en un VPS desnudo con nginx, TLS y un pipeline de CI propio.',
+    need: 'Desarrollar habilidades de DevOps de forma práctica en un proyecto real en producción.',
+    idea: 'Usar mi portfolio personal para autogestionar todo el ciclo (servidor, TLS, CI/CD, hardening) y dejarlo preparado para desplegar futuras aplicaciones web.',
     link: { label: 'Código', href: projectsEn[3].link.href },
   },
 ]
