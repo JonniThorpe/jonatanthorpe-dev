@@ -226,10 +226,10 @@ export const hobbies = {
     { title: 'Lex Fridman Podcast', cover: 'https://is1-ssl.mzstatic.com/image/thumb/Podcasts115/v4/3e/e3/9c/3ee39c89-de08-47a6-7f3d-3849cef6d255/mza_16657851278549137484.png/600x600bb.jpg', alt: 'Lex Fridman Podcast cover' },
   ],
   Sport: [
-    { title: 'Fútbol', cover: 'https://commons.wikimedia.org/wiki/Special:FilePath/Ball%20white%20black.jpg?width=500', alt: 'Football / soccer ball' },
+    { title: 'Football', cover: 'https://commons.wikimedia.org/wiki/Special:FilePath/Ball%20white%20black.jpg?width=500', alt: 'Football / soccer ball' },
     { title: 'Padel', cover: 'https://commons.wikimedia.org/wiki/Special:FilePath/Padel%20rackets%20and%20balls.jpg?width=500', alt: 'Padel rackets and balls' },
-    { title: 'Gimnasio', cover: 'https://commons.wikimedia.org/wiki/Special:FilePath/Kurzhanteln%202%20x%2015%20kg%201v2.jpg?width=500', alt: 'Dumbbells at the gym' },
-    { title: 'Andar', cover: 'https://commons.wikimedia.org/wiki/Special:FilePath/Forest%20ranger%20walking%20through%20the%20trail%20to%20Netravati%20peak.jpg?width=500', alt: 'Person walking a forest trail' },
+    { title: 'Gym', cover: 'https://commons.wikimedia.org/wiki/Special:FilePath/Kurzhanteln%202%20x%2015%20kg%201v2.jpg?width=500', alt: 'Dumbbells at the gym' },
+    { title: 'Wal', cover: 'https://commons.wikimedia.org/wiki/Special:FilePath/Forest%20ranger%20walking%20through%20the%20trail%20to%20Netravati%20peak.jpg?width=500', alt: 'Person walking a forest trail' },
     { title: 'Golf', cover: 'https://commons.wikimedia.org/wiki/Special:FilePath/Golf%20ball%20with%20white%20tee%20in%20grass.jpg?width=500', alt: 'Golf ball with tee in grass' },
   ],
 }

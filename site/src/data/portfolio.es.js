@@ -133,5 +133,11 @@ export const hobbies = {
     { ...hobbiesEn.Books[5], title: 'El truco de los Ricos (actualmente leyendo)' },
   ],
   Podcasts: hobbiesEn.Podcasts,
-  Deporte: hobbiesEn.Sport,
+  Sport: [
+    { title: 'Fútbol', cover: 'https://commons.wikimedia.org/wiki/Special:FilePath/Ball%20white%20black.jpg?width=500', alt: 'Football / soccer ball' },
+    { title: 'Padel', cover: 'https://commons.wikimedia.org/wiki/Special:FilePath/Padel%20rackets%20and%20balls.jpg?width=500', alt: 'Padel rackets and balls' },
+    { title: 'Gimnasio', cover: 'https://commons.wikimedia.org/wiki/Special:FilePath/Kurzhanteln%202%20x%2015%20kg%201v2.jpg?width=500', alt: 'Dumbbells at the gym' },
+    { title: 'Andar', cover: 'https://commons.wikimedia.org/wiki/Special:FilePath/Forest%20ranger%20walking%20through%20the%20trail%20to%20Netravati%20peak.jpg?width=500', alt: 'Person walking a forest trail' },
+    { title: 'Golf', cover: 'https://commons.wikimedia.org/wiki/Special:FilePath/Golf%20ball%20with%20white%20tee%20in%20grass.jpg?width=500', alt: 'Golf ball with tee in grass' },
+  ],
 }
