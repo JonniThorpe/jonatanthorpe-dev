@@ -20,6 +20,9 @@ Thumbs.db
 .vscode/
 .idea/
 
-# Claude
-Claude.md
-docs/
+# CLAUDE.md y docs/ SI se versionan: son documentacion del proyecto, no ruido
+# generado. Estaban ignorados aqui, y como .gitignore no afecta a lo ya
+# trackeado, los ficheros viejos se veian y cada documento NUEVO desaparecia en
+# silencio. Con CLAUDE.md era peor: en Windows (core.ignorecase=true) el patron
+# "Claude.md" casa con "CLAUDE.md", asi que bastaba borrarlo y volver a crearlo
+# para perderlo. No los vuelvas a anadir.
