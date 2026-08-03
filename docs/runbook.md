@@ -97,8 +97,9 @@ sudo ufw status verbose
 # nginx: test de config y recarga (nunca 'restart' a ciegas)
 sudo nginx -t && sudo systemctl reload nginx
 
-# logs de nginx
-sudo tail -f /var/log/nginx/access.log
+# logs de nginx — uno por sitio (ver sección F)
+sudo tail -f /var/log/nginx/portfolio.access.log
+sudo tail -f /var/log/nginx/app.access.log
 sudo tail -f /var/log/nginx/error.log
 
 # fail2ban: ver IPs baneadas en SSH
@@ -248,7 +249,50 @@ Prueba: abre el stream y comprueba que **aguanta más de un minuto**.
 
 ---
 
-## F. Reglas de oro
+## F. Auditar visitas por sitio
+
+Cada vhost escribe su propio log de acceso (`access_log` en
+`infra/nginx/*.conf`). **Por qué**: el `access_log` global de `nginx.conf` mete
+los dos dominios en el mismo fichero y el formato `combined` no registra
+`$host`, así que una vez mezclado no hay campo por el que separarlos.
+
+| Fichero | Qué contiene |
+|---|---|
+| `/var/log/nginx/portfolio.access.log` | `jonatanthorpe.dev` + `www` |
+| `/var/log/nginx/app.access.log` | `app.jonatanthorpe.dev` (panel, `/api/*`, webhooks de Meta) |
+| `/var/log/nginx/access.log` | Histórico mezclado, anterior al 2026-08-03 |
+
+Los informes los saca **GoAccess** (`apt install goaccess`) con
+`infra/scripts/traffic-report.sh`, que hay que copiar al servidor:
+
+```bash
+# desde LOCAL, raíz del repo
+scp infra/scripts/traffic-report.sh deploy@167.235.151.15:~/
+
+# en el SERVIDOR
+chmod +x ~/traffic-report.sh
+~/traffic-report.sh both            # dashboard en terminal (necesita TTY)
+~/traffic-report.sh app --html      # informe HTML a /tmp
+~/traffic-report.sh legacy          # el histórico mezclado
+```
+
+Para verlo en el navegador, trae el HTML a tu máquina en vez de publicarlo:
+`scp deploy@167.235.151.15:/tmp/traffic-app-*.html .` — servirlo desde nginx
+expondría IPs de visitantes y rutas internas a cualquiera.
+
+**Ventana de datos: 14 días.** `logrotate` rota a diario y guarda 14
+(`/etc/logrotate.d/nginx`). El script ya lee los `.gz` rotados además del log
+vivo. Si algún día quieres histórico largo, hay que subir ese `rotate` o
+volcar un resumen antes de que caduque.
+
+**Al leer las cifras:** el VPS recibe escaneo automático constante
+(`/wp-admin`, `/.git`, `/1.php` — 4 289 rutas inexistentes en 15 días). El
+script pasa `--ignore-crawlers`, pero eso sólo filtra bots que se identifican
+como tales; los escáneres que se disfrazan de navegador siguen contando.
+
+---
+
+## G. Reglas de oro
 
 - Todo cambio en el server se refleja como **código en `infra/`**. El server no es
   la fuente de verdad; el repo lo es.
