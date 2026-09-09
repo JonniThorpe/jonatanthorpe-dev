@@ -11,7 +11,11 @@ infra/
 ├── scripts/
 │   ├── bootstrap.sh                 # hardening + setup inicial (como root)
 │   ├── deploy.sh                    # build local + sync del dist/ (deploy manual)
-│   └── docker-setup.sh              # Docker + swap + rotacion de logs (Fase 3)
+│   ├── docker-setup.sh              # Docker + swap + rotacion de logs (Fase 3)
+│   ├── traffic-report.sh            # informe GoAccess sobre los logs vivos
+│   └── traffic-snapshot.sh          # congela metricas antes de que logrotate las borre
+├── cron/
+│   └── traffic-snapshot.cron        # -> /etc/cron.d/traffic-snapshot (semanal)
 └── README.md                        # este runbook
 ```
 

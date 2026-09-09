@@ -282,8 +282,57 @@ expondría IPs de visitantes y rutas internas a cualquiera.
 
 **Ventana de datos: 14 días.** `logrotate` rota a diario y guarda 14
 (`/etc/logrotate.d/nginx`). El script ya lee los `.gz` rotados además del log
-vivo. Si algún día quieres histórico largo, hay que subir ese `rotate` o
-volcar un resumen antes de que caduque.
+vivo. Pasados esos 14 días el log se borra y no hay forma de recuperarlo: por
+eso existe el snapshot semanal de la sección siguiente.
+
+### Histórico permanente: `traffic-snapshot.sh`
+
+`traffic-report.sh` analiza los logs **vivos**; `traffic-snapshot.sh` congela
+el resultado **antes de que caduquen**. Corre por cron los lunes a las 04:17
+UTC y escribe una línea JSON por día y sitio en
+`/var/lib/traffic-snapshots/{portfolio,app,legacy}.ndjson`.
+
+```bash
+# desde LOCAL, raíz del repo — instalación (idempotente, repetible)
+scp infra/scripts/traffic-snapshot.sh infra/cron/traffic-snapshot.cron deploy@167.235.151.15:/tmp/
+ssh deploy@167.235.151.15 '
+  sudo install -o root -g root -m 0755 /tmp/traffic-snapshot.sh /usr/local/sbin/traffic-snapshot.sh
+  sudo install -o root -g root -m 0644 /tmp/traffic-snapshot.cron /etc/cron.d/traffic-snapshot
+  sudo /usr/local/sbin/traffic-snapshot.sh all'    # primera pasada: no esperes al lunes
+```
+
+Consultarlo (el fichero está ordenado por fecha, no hace falta `jq`):
+
+```bash
+ssh deploy@167.235.151.15 'cat /var/lib/traffic-snapshots/portfolio.ndjson'
+
+# visitas reales por mes
+ssh deploy@167.235.151.15 'cat /var/lib/traffic-snapshots/portfolio.ndjson' \
+  | sed -E 's/.*"date":"([0-9]{4}-[0-9]{2}).*"browser_ips":([0-9]+).*/\1 \2/' \
+  | awk '{m[$1]+=$2} END {for (k in m) print k, m[k]}' | sort
+```
+
+| Campo | Qué es |
+|---|---|
+| `requests` | Líneas del log. Incluye escaneo: es volumen, no visitas. |
+| `unique_ips` | IPs distintas. Inflado por escáneres que piden `/` y se van. |
+| `browser_ips` | **La cifra que cuenta.** IPs que pidieron un asset con hash de `/assets/`: sólo un navegador que ejecuta la página va a por el bundle. |
+| `root_hits` | Peticiones a `/`. |
+| `non_browser_requests` | User-agent que no empieza por `Mozilla` (curl, scripts). |
+| `status_4xx` / `5xx` | Errores. Un 4xx alto es escaneo, no un fallo del sitio. |
+
+**Sólo agregados, nunca IPs ni user-agents en crudo.** Una IP es dato personal
+y esto se guarda para siempre; además mantiene el fichero en ~2 KB por cada 14
+días (~60 KB al año por sitio) en vez de megabytes. El precio: no se puede
+volver a preguntar nada que no esté ya agregado ahí. Si algún día quieres una
+métrica nueva, añádela al script **antes** de que pasen los 14 días.
+
+Dos garantías del script, ambas verificadas: es **idempotente** (reprocesa toda
+la ventana y reescribe sólo los días que recalcula, así que ejecutarlo dos
+veces deja el mismo fichero) y **sólo cierra días completos** — el día en curso
+se ignora y se recoge entero en la pasada siguiente. Semanal sobre una ventana
+de 14 días da margen de x2: si el cron falla una semana no se pierde nada; dos
+semanas seguidas caído, sí.
 
 **Al leer las cifras:** el VPS recibe escaneo automático constante
 (`/wp-admin`, `/.git`, `/1.php` — 4 289 rutas inexistentes en 15 días). El

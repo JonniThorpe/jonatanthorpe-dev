@@ -1,0 +1,16 @@
+# Snapshot semanal de metricas de trafico -> /etc/cron.d/traffic-snapshot
+#
+# Se instala en /etc/cron.d (no en el crontab de un usuario) para que quede
+# como fichero versionable y con el usuario explicito en la linea. Como root:
+#   install -m 0644 traffic-snapshot.cron /etc/cron.d/traffic-snapshot
+#
+# Semanal, no diario: logrotate guarda 14 dias, asi que una pasada cada 7 deja
+# un margen de x2. Si el cron falla una semana, la siguiente aun alcanza los
+# dias que quedaron sin cerrar; dos semanas caidas si pierden datos.
+#
+# Lunes 04:17 UTC. Minuto impar a proposito: 00 lo comparten media docena de
+# cron del sistema y no hay razon para sumarse a ese pico.
+SHELL=/bin/bash
+PATH=/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin
+
+17 4 * * 1 root /usr/local/sbin/traffic-snapshot.sh all >> /var/log/traffic-snapshot.log 2>&1

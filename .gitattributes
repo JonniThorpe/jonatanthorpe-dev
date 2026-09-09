@@ -1,3 +1,6 @@
 # Los scripts de shell DEBEN tener saltos de linea LF, o bash en el servidor
 # (Ubuntu) falla con errores raros (\r). Fuerza LF aunque se editen en Windows.
 *.sh text eol=lf
+# Mismo motivo para los cron.d: un fichero con CRLF en /etc/cron.d hace que
+# cron descarte la linea sin avisar. Se copian tal cual al servidor.
+*.cron text eol=lf
