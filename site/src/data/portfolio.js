@@ -11,7 +11,7 @@ export const profile = {
   email: 'jonnithorpe7@gmail.com',
   cvUrl: '/cv/CV_Jonatan_Thorpe_ATS_EN.pdf',
   photo: {
-    src: '/profile.jpg',
+    src: '/profile.png',
     alt: 'Portrait photo of Jonatan Thorpe',
   },
   social: {
