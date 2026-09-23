@@ -16,7 +16,7 @@ export const profile = {
   ...profileEn,
   role: 'Ingeniero de Software · Full Stack y Machine Learning aplicado',
   focus: 'Ingeniero backend con experiencia en desarrollo de productos full-stack, con experiencia práctica en fine-tuning de modelos de lenguaje y visión para problemas reales de negocio.',
-  cvUrl: '/cv/CV_Jonatan_Thorpe_ATS_ES.pdf',
+  cvUrl: '/cv/CV_Jonatan_Thorpe_Plaza.pdf',
 }
 
 export const about = {
