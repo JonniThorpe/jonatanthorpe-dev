@@ -11,7 +11,7 @@ export const profile = {
   location: 'Alhaurín el Grande, Málaga, Spain',
   openToRemote: true,
   email: 'jonnithorpe7@gmail.com',
-  cvUrl: '/cv/CV_Jonatan_Thorpe_ATS_EN.pdf',
+  cvUrl: '/cv/CV_Jonatan_Thorpe_Plaza.pdf',
   photo: {
     src: '/profile.png',
     alt: 'Portrait photo of Jonatan Thorpe',
