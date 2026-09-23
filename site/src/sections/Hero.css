@@ -1,4 +1,11 @@
+/* Hero colours over the photo. Light: palette text/accent over the pale
+   sky, helped by soft scrims. Dark: the photo is veiled with the dark bg so
+   the light palette text keeps its contrast. */
 .hero {
+  --hero-veil: transparent;
+  --hero-scrim: color-mix(in srgb, var(--color-bg) 45%, transparent);
+
+  position: relative;
   min-height: min(88vh, 720px);
   display: flex;
   align-items: center;
@@ -6,35 +13,70 @@
   scroll-margin-top: var(--nav-height, 64px);
 }
 
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme='light']) .hero {
+    --hero-veil: color-mix(in srgb, var(--color-bg) 55%, transparent);
+    --hero-scrim: color-mix(in srgb, var(--color-bg) 70%, transparent);
+  }
+}
+
+:root[data-theme='dark'] .hero {
+  --hero-veil: color-mix(in srgb, var(--color-bg) 55%, transparent);
+  --hero-scrim: color-mix(in srgb, var(--color-bg) 70%, transparent);
+}
+
+/* Desktop: slide the photo up under the (transparent) sticky nav so the bar
+   blends into it. Mobile nav sits at the bottom, so nothing to tuck under. */
+@media (min-width: 1101px) {
+  .hero {
+    margin-top: calc(-1 * var(--nav-height));
+    padding-top: var(--nav-height);
+    min-height: calc(min(88vh, 720px) + var(--nav-height));
+  }
+}
+
+/* Background photo (third-party, see credit) + veil, a top scrim behind the
+   nav, a left scrim for the text column and a bottom fade into the page. */
+.hero__bg {
+  position: absolute;
+  inset: 0;
+  background: url('/hero-mountains-2400.webp') center 62% / cover no-repeat;
+}
+
+.hero__bg::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(to bottom, transparent 65%, var(--color-bg) 100%),
+    linear-gradient(to bottom, var(--hero-scrim) 0, transparent calc(var(--nav-height) * 2)),
+    linear-gradient(90deg, var(--hero-scrim) 0%, transparent 65%),
+    linear-gradient(var(--hero-veil), var(--hero-veil));
+}
+
 .hero__inner {
+  position: relative;
   max-width: var(--content-max);
   margin-inline: auto;
   width: 100%;
 }
 
 .hero__eyebrow {
-  color: var(--color-accent-secondary);
+  color: var(--color-text);
   margin-bottom: var(--space-4);
 }
 
-.hero__title {
-  font-size: var(--text-3xl);
-  line-height: var(--leading-tight);
-}
-
 .hero__role {
-  font-family: var(--font-display);
-  font-size: var(--text-lg);
-  font-weight: var(--weight-medium);
+  font-size: var(--text-2xl);
+  text-wrap: balance;
   color: var(--color-accent);
-  margin-top: var(--space-3);
 }
 
 .hero__focus {
   font-size: var(--text-md);
-  color: var(--color-text-secondary);
+  color: var(--color-text);
   max-width: 54ch;
-  margin-top: var(--space-4);
+  margin-top: var(--space-5);
 }
 
 .hero__cta {
@@ -44,12 +86,18 @@
   margin-top: var(--space-8);
 }
 
+.hero .btn--ghost {
+  background: color-mix(in srgb, var(--color-bg) 55%, transparent);
+}
+
 @media (max-width: 640px) {
-  .hero__title { font-size: var(--text-2xl); }
+  .hero__role { font-size: var(--text-xl); }
+  /* Portrait crop of the same photo: sky on top for the text, ridges below */
+  .hero__bg { background-image: url('/hero-mountains-portrait.webp'); background-position: center bottom; }
   /* Top-align on mobile (no top navbar to balance against) so the hero
      doesn't sit with a large empty gap above it. */
   .hero {
-    min-height: auto;
+    min-height: 88svh;
     align-items: flex-start;
     padding-top: var(--space-8);
     padding-bottom: var(--space-10);

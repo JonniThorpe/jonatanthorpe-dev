@@ -4,7 +4,9 @@
 
 export const profile = {
   name: 'Jonatan Thorpe Plaza',
-  role: 'Computer Engineer · Software Development · AI/ML',
+  // Navbar brand: shown in full over the hero, folds into "JT" on scroll
+  brandName: { first: 'Jonatan', last: 'Thorpe' },
+  role: 'Software Engineer · Applied Full Stack & Machine Learning',
   focus: 'Backend engineer building full-stack products, with hands-on experience fine-tuning language and vision models for real business problems.',
   location: 'Alhaurín el Grande, Málaga, Spain',
   openToRemote: true,
