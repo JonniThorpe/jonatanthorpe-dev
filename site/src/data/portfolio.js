@@ -226,7 +226,8 @@ export const hobbies = {
     { title: 'The Alchemist', cover: 'https://covers.openlibrary.org/b/id/7414780-M.jpg', alt: 'Cover of The Alchemist' },
     { title: 'The Lean Startup', cover: 'https://covers.openlibrary.org/b/id/7104760-M.jpg', alt: 'Cover of The Lean Startup' },
     { title: 'Marco Aurelio Meditations', cover: 'https://m.media-amazon.com/images/I/81DFDGzHZqL.jpg', alt: 'Cover of Meditations by Marcus Aurelius' },
-    { title: 'Los trucos de los ricos', cover: 'https://imagessl8.casadellibro.com/a/l/t5/18/9788423439218.jpg', alt: 'Cover of Los trucos de los ricos', current: true },
+    { title: 'Los trucos de los ricos', cover: 'https://imagessl8.casadellibro.com/a/l/t5/18/9788423439218.jpg', alt: 'Cover of Los trucos de los ricos' },
+    { title: 'The Obstacle Is the Way', cover: 'https://covers.openlibrary.org/b/id/14428233-M.jpg', alt: 'Cover of The Obstacle Is the Way by Ryan Holiday', current: true },
   ],
   Podcasts: [
     { title: 'Spicy4Tuna', cover: 'https://is1-ssl.mzstatic.com/image/thumb/Podcasts221/v4/0f/2b/d7/0f2bd77d-4309-af4c-12f3-06ea56d28bd3/mza_2881845507794056917.jpg/600x600bb.jpg', alt: 'Spicy4Tuna podcast cover' },
