@@ -1,147 +1,149 @@
 /* ============================================================
-   Infinite showcase strip (all hobbies)
+   Hobbies — three cards: books (now + shelf), podcasts, sport
    ============================================================ */
-.hstrip__viewport {
-  overflow: hidden;
-  /* extra vertical breathing room so a hovered tile can scale up
-     (see .cover:hover below) without being clipped by this viewport */
-  padding: var(--space-8) 0;
-  margin: calc(var(--space-8) * -1) 0 var(--space-4);
-  -webkit-mask-image: linear-gradient(to right, transparent, #000 6%, #000 94%, transparent);
-  mask-image: linear-gradient(to right, transparent, #000 6%, #000 94%, transparent);
-}
-
-.hstrip__track {
-  display: flex;
+.hobbies {
+  display: grid;
+  grid-template-columns: 1.5fr 1fr 1fr;
   gap: var(--space-5);
-  width: max-content;
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  /* duration set inline per current speed (Hobbies.jsx); this is just a
-     sane fallback if that ever fails to apply */
-  animation: hstrip-scroll 40s linear infinite;
+  align-items: stretch;
 }
 
-.hstrip__viewport:hover .hstrip__track,
-.hstrip__track:focus-within { animation-play-state: paused; }
-
-.hstrip__item { flex: 0 0 auto; position: relative; }
-
-/* lift the hovered/focused tile's stacking above its neighbours once it
-   scales past the tile boundary */
-.hstrip__item:hover,
-.hstrip__item:focus-within { z-index: 2; }
-
-@keyframes hstrip-scroll {
-  from { transform: translateX(0); }
-  to   { transform: translateX(-50%); }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .hstrip__track { animation: none; }
-  .hstrip__viewport { overflow-x: auto; }
-}
-
-/* ============================================================
-   Cover tile — square by default; hover/focus pops it bigger with a
-   springy overshoot ("water balloon" bounce) and swaps the image from
-   cropped to fully visible, revealing its real/native shape.
-   ============================================================ */
-.cover {
-  position: relative;
-  display: block;
-  margin: 0;
-  width: 120px;
-  aspect-ratio: 1 / 1;
-  border-radius: var(--radius-md);
-  overflow: hidden;
-  border: 1px solid var(--color-border);
+.hcard {
   background: var(--color-surface);
-  transform: scale(1);
-  transform-origin: center;
-  transition: transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
-  /* hint the browser to keep this layer crisp at the hover scale, instead
-     of rasterizing at 1x and blitting up (which softened the rounded
-     corners into near-square edges) */
-  will-change: transform;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: var(--space-5);
 }
 
-.hstrip__item:hover .cover,
-.hstrip__item:focus-within .cover {
-  transform: scale(1.45);
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .cover { transition: none; }
-}
-
-.cover img {
-  display: block;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
-.hstrip__item:hover .cover img,
-.hstrip__item:focus-within .cover img {
-  object-fit: contain;
-}
-
-.cover__caption {
-  position: absolute;
-  inset: auto 0 0 0;
-  display: flex;
-  flex-direction: column;
-  gap: 2px;
-  padding: var(--space-2) var(--space-3);
-  background: linear-gradient(to top, rgba(0,0,0,0.85), rgba(0,0,0,0));
-  opacity: 0;
-  transition: opacity var(--duration-base) var(--ease-standard);
-}
-
-.hstrip__item:hover .cover__caption,
-.hstrip__item:focus-within .cover__caption { opacity: 1; }
-
-.cover__category {
-  font-family: var(--font-mono);
-  font-size: 0.65rem;
-  letter-spacing: var(--tracking-wide);
+.hcard__label {
+  font-size: var(--text-xs);
+  font-weight: var(--weight-regular);
   text-transform: uppercase;
   color: var(--color-accent-secondary);
+  margin-bottom: var(--space-4);
 }
 
-.cover__title {
-  font-family: var(--font-mono);
-  font-size: var(--text-xs);
-  color: #fff;
-}
-
-/* ============================================================
-   Speed slider
-   ============================================================ */
-.hspeed {
-  display: flex;
-  align-items: center;
-  gap: var(--space-3);
+.hcard__note {
+  margin-top: var(--space-1);
+  font-size: var(--text-sm);
+  font-style: italic;
   color: var(--color-text-secondary);
 }
 
-.hspeed__label {
+/* ---- Reading now ----------------------------------------- */
+.hnow {
+  display: flex;
+  gap: var(--space-4);
+  align-items: flex-end;
+  margin-bottom: var(--space-6);
+}
+
+.hnow__cover {
+  width: 112px;
+  aspect-ratio: 2 / 3;
+  object-fit: cover;
+  border-radius: 4px;
+  box-shadow: var(--shadow-lift);
+  flex-shrink: 0;
+}
+
+.hnow__title {
+  font-family: var(--font-display);
+  font-size: var(--text-lg);
+  font-weight: var(--weight-semibold);
+  line-height: var(--leading-snug);
+}
+
+/* ---- Shelf: books standing on a ledge; hover/focus lifts one --- */
+.hshelf {
+  display: flex;
+  align-items: flex-end;
+  gap: var(--space-2);
+  list-style: none;
+  margin: 0;
+  padding: 0 var(--space-2);
+  border-bottom: 6px solid var(--color-border);
+  border-radius: 0 0 2px 2px;
+}
+
+.hshelf__book {
+  position: relative;
+  flex: 0 1 56px;
+  cursor: default;
+  transition: transform var(--duration-base) var(--ease-out);
+}
+
+.hshelf__book img {
+  display: block;
+  width: 100%;
+  aspect-ratio: 2 / 3;
+  object-fit: cover;
+  border-radius: 2px 3px 3px 2px;
+  box-shadow: var(--shadow-card);
+}
+
+.hshelf__book:hover,
+.hshelf__book:focus-visible { transform: translateY(-10px); }
+
+.hshelf__tip {
+  position: absolute;
+  bottom: calc(100% + var(--space-2));
+  left: 50%;
+  translate: -50% 0;
+  width: max-content;
+  max-width: 180px;
+  padding: var(--space-1) var(--space-2);
   font-family: var(--font-mono);
-  font-size: var(--text-sm);
+  font-size: var(--text-xs);
+  text-align: center;
+  color: var(--color-bg);
+  background: var(--color-text);
+  border-radius: var(--radius-sm);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity var(--duration-fast) var(--ease-standard);
+  z-index: 2;
 }
 
-.hspeed input[type='range'] {
-  flex: 1;
-  max-width: 220px;
-  accent-color: var(--color-accent);
+.hshelf__book:hover .hshelf__tip,
+.hshelf__book:focus-visible .hshelf__tip { opacity: 1; }
+
+/* ---- Compact lists (podcasts, sport) ---------------------- */
+.hlist {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  list-style: none;
+  margin: 0;
+  padding: 0;
 }
 
-/* Bigger tiles + faster default loop on mobile (speed default is set in
-   Hobbies.jsx; this just covers the visual size). */
+.hlist__item {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.hlist__thumb {
+  width: 40px;
+  height: 40px;
+  object-fit: cover;
+  border-radius: var(--radius-sm);
+  flex-shrink: 0;
+}
+
+.hlist__title { font-weight: var(--weight-medium); }
+
+@media (prefers-reduced-motion: reduce) {
+  .hshelf__book { transition: none; }
+}
+
+/* Tablet: books full width on top, the other two side by side */
+@media (max-width: 1100px) {
+  .hobbies { grid-template-columns: 1fr 1fr; }
+  .hcard--books { grid-column: 1 / -1; }
+}
+
 @media (max-width: 640px) {
-  .cover { width: 150px; }
-  .hstrip__item:hover .cover,
-  .hstrip__item:focus-within .cover { transform: scale(1.3); }
+  .hobbies { grid-template-columns: 1fr; }
 }

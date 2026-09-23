@@ -84,7 +84,7 @@ export function buildMarkdown(content) {
   push('## Hobbies')
   push('')
   Object.entries(hobbies).forEach(([cat, items]) => {
-    push(`- **${cat}:** ${items.map((i) => i.title).join(', ')}`)
+    push(`- **${cat}:** ${items.map((i) => i.title + (i.current ? ' (currently reading)' : '')).join(', ')}`)
   })
   push('')
 
