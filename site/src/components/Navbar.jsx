@@ -1,8 +1,9 @@
-import { useEffect, useMemo, useState } from 'react'
+import { useEffect, useMemo, useRef, useState } from 'react'
 import { Menu, X } from 'lucide-react'
 import { navSections } from '../config/sections.config.js'
 import { useScrollSpy } from '../hooks/useScrollSpy.js'
 import { useLang } from '../i18n/LanguageProvider.jsx'
+import { useBrandFold } from '../hooks/useBrandFold.js'
 import LangToggle from './chrome/LangToggle.jsx'
 import ThemeToggle from './chrome/ThemeToggle.jsx'
 import SocialLinks from './chrome/SocialLinks.jsx'
@@ -12,13 +13,17 @@ import './Navbar.css'
 
 /* Navbar. Links render FROM sections.config (labels come from i18n); the
    current section is scrollspy-highlighted (underline). Desktop: sticky top
-   bar. Mobile (<=768px): bottom tab bar whose hamburger expands a panel
-   upward with the full nav + controls. */
+   bar. Mobile/tablet (<=1100px): bottom tab bar whose hamburger expands a panel
+   upward with the full nav + controls. The desktop brand shows the full
+   name over the hero and folds into "JT" on scroll (useBrandFold). */
 export default function Navbar() {
   const ids = useMemo(() => navSections.map((s) => s.id), [])
   const active = useScrollSpy(ids)
-  const { ui } = useLang()
+  const { ui, content } = useLang()
+  const { first, last } = content.profile.brandName
   const [open, setOpen] = useState(false)
+  const brandRef = useRef(null)
+  useBrandFold(brandRef)
 
   useEffect(() => {
     if (!open) return
@@ -48,7 +53,14 @@ export default function Navbar() {
       {/* ---- Desktop / tablet: sticky top bar ---- */}
       <header className="nav">
         <nav className="nav__inner" aria-label={ui.navAria.primary}>
-          <a className="nav__brand" href="#hero">JT</a>
+          <a className="nav__brand" href="#hero" ref={brandRef} aria-label={`${first} ${last}`}>
+            <span aria-hidden="true">
+              <span>{first[0]}</span>
+              <span className="nav__fold">{first.slice(1)}&nbsp;</span>
+              <span>{last[0]}</span>
+              <span className="nav__fold">{last.slice(1)}</span>
+            </span>
+          </a>
           <ul className="nav__links">{renderLinks()}</ul>
           <div className="nav__actions">
             <LangToggle />
