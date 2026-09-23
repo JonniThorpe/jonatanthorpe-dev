@@ -26,13 +26,19 @@
 }
 
 /* Desktop: slide the photo up under the (transparent) sticky nav so the bar
-   blends into it. Mobile nav sits at the bottom, so nothing to tuck under. */
+   blends into it, and fill the whole first screen. Mobile nav sits at the
+   bottom, so nothing to tuck under. */
 @media (min-width: 1101px) {
   .hero {
     margin-top: calc(-1 * var(--nav-height));
     padding-top: var(--nav-height);
-    min-height: calc(min(88vh, 720px) + var(--nav-height));
+    min-height: 100svh;
   }
+}
+
+/* Large or high-density screens (2K/4K, Retina): sharper 3840px version */
+@media (min-width: 1101px) and (min-resolution: 1.5dppx), (min-width: 2400px) {
+  .hero__bg { background-image: url('/hero-mountains-3840.webp'); }
 }
 
 /* Background photo (third-party, see credit) + veil, a top scrim behind the
