@@ -226,7 +226,7 @@ export const hobbies = {
     { title: 'The Alchemist', cover: 'https://covers.openlibrary.org/b/id/7414780-M.jpg', alt: 'Cover of The Alchemist' },
     { title: 'The Lean Startup', cover: 'https://covers.openlibrary.org/b/id/7104760-M.jpg', alt: 'Cover of The Lean Startup' },
     { title: 'Marco Aurelio Meditations', cover: 'https://m.media-amazon.com/images/I/81DFDGzHZqL.jpg', alt: 'Cover of Meditations by Marcus Aurelius' },
-    { title: 'El truco de los Ricos (currently reading)', cover: 'https://imagessl8.casadellibro.com/a/l/t5/18/9788423439218.jpg', alt: 'Cover of El truco de los Ricos' },
+    { title: 'Los trucos de los ricos', cover: 'https://imagessl8.casadellibro.com/a/l/t5/18/9788423439218.jpg', alt: 'Cover of Los trucos de los ricos', current: true },
   ],
   Podcasts: [
     { title: 'Spicy4Tuna', cover: 'https://is1-ssl.mzstatic.com/image/thumb/Podcasts221/v4/0f/2b/d7/0f2bd77d-4309-af4c-12f3-06ea56d28bd3/mza_2881845507794056917.jpg/600x600bb.jpg', alt: 'Spicy4Tuna podcast cover' },
@@ -239,7 +239,7 @@ export const hobbies = {
     { title: 'Football', cover: 'https://commons.wikimedia.org/wiki/Special:FilePath/Ball%20white%20black.jpg?width=500', alt: 'Football / soccer ball' },
     { title: 'Padel', cover: 'https://commons.wikimedia.org/wiki/Special:FilePath/Padel%20rackets%20and%20balls.jpg?width=500', alt: 'Padel rackets and balls' },
     { title: 'Gym', cover: 'https://commons.wikimedia.org/wiki/Special:FilePath/Kurzhanteln%202%20x%2015%20kg%201v2.jpg?width=500', alt: 'Dumbbells at the gym' },
-    { title: 'Wal', cover: 'https://commons.wikimedia.org/wiki/Special:FilePath/Forest%20ranger%20walking%20through%20the%20trail%20to%20Netravati%20peak.jpg?width=500', alt: 'Person walking a forest trail' },
+    { title: 'Walking', cover: 'https://commons.wikimedia.org/wiki/Special:FilePath/Forest%20ranger%20walking%20through%20the%20trail%20to%20Netravati%20peak.jpg?width=500', alt: 'Person walking a forest trail' },
     { title: 'Golf', cover: 'https://commons.wikimedia.org/wiki/Special:FilePath/Golf%20ball%20with%20white%20tee%20in%20grass.jpg?width=500', alt: 'Golf ball with tee in grass' },
   ],
 }

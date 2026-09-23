@@ -138,7 +138,7 @@ export const hobbies = {
     { ...hobbiesEn.Books[2], title: 'El Alquimista' },
     { ...hobbiesEn.Books[3], title: 'El método Lean Startup' },
     { ...hobbiesEn.Books[4], title: 'Meditaciones de Marco Aurelio' },
-    { ...hobbiesEn.Books[5], title: 'El truco de los Ricos (actualmente leyendo)' },
+    { ...hobbiesEn.Books[5], title: 'Los trucos de los ricos' },
   ],
   Podcasts: hobbiesEn.Podcasts,
   Sport: [
