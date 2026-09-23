@@ -33,8 +33,16 @@ const uiEn = {
   },
   experience: { eyebrow: 'Experience', title: 'Experience' },
   studies: { eyebrow: 'Studies & certifications', title: 'Studies & certifications' },
-  skills: { eyebrow: 'Skills', title: 'Skills', all: 'All', filterLabel: 'Filter skills by category' },
-  hobbies: { eyebrow: 'Hobbies', title: 'Hobbies', speed: 'Speed' },
+  skills: {
+    eyebrow: 'Skills', title: 'Skills',
+    summit: 'Summit', summitDesc: 'Proven in real projects and documented',
+    halfway: 'Halfway up', halfwayDesc: 'Solid working knowledge',
+    base: 'Base camp', baseDesc: 'Used, still climbing',
+  },
+  hobbies: {
+    eyebrow: 'Hobbies', title: 'Off the keyboard',
+    reading: 'Reading now', shelf: 'On the shelf', listening: 'Listening to', moving: 'On the move',
+  },
   contact: {
     eyebrow: 'Contact', title: 'Get in touch',
     lead: 'Open to remote / international roles. The fastest way to reach me:',
@@ -65,8 +73,16 @@ const uiEs = {
   },
   experience: { eyebrow: 'Experiencia', title: 'Experiencia' },
   studies: { eyebrow: 'Formación académica', title: 'Formación académica' },
-  skills: { eyebrow: 'Habilidades', title: 'Habilidades', all: 'Todas', filterLabel: 'Filtrar habilidades por categoría' },
-  hobbies: { eyebrow: 'Aficiones', title: 'Aficiones', speed: 'Velocidad' },
+  skills: {
+    eyebrow: 'Habilidades', title: 'Habilidades',
+    summit: 'Cima', summitDesc: 'Probadas en proyectos reales y documentadas',
+    halfway: 'Media ladera', halfwayDesc: 'Base sólida de trabajo',
+    base: 'Campo base', baseDesc: 'Usadas, sigo subiendo',
+  },
+  hobbies: {
+    eyebrow: 'Aficiones', title: 'Fuera del teclado',
+    reading: 'Leyendo ahora', shelf: 'En la estantería', listening: 'Escuchando', moving: 'En movimiento',
+  },
   contact: {
     eyebrow: 'Contacto', title: 'Ponte en contacto',
     lead: 'Abierto a puestos remotos / internacionales. La forma más rápida de contactarme:',
