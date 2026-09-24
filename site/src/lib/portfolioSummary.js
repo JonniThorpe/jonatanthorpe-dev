@@ -61,7 +61,9 @@ export function buildMarkdown(content) {
     push(`### ${job.role} — ${job.company}`)
     push(`_${job.dates} · ${job.location}_`)
     push('')
-    push(job.description)
+    if (job.context) push(job.context, '')
+    job.bullets.forEach((b) => push(`- ${b}`))
+    push(`- Stack: ${job.stack.join(', ')}`)
     push('')
   })
 

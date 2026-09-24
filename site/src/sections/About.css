@@ -37,5 +37,11 @@
   }
   .about__photo {
     max-width: 260px;
+    justify-self: center;
+  }
+  /* Justified text; hyphenation (per <html lang>) avoids wide word gaps */
+  .about__p {
+    text-align: justify;
+    hyphens: auto;
   }
 }

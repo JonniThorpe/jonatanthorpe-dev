@@ -99,11 +99,11 @@
 @media (max-width: 640px) {
   .hero__role { font-size: var(--text-xl); }
   /* Portrait crop of the same photo: sky on top for the text, ridges below */
-  .hero__bg { background-image: url('/hero-mountains-portrait.webp'); background-position: center bottom; }
-  /* Top-align on mobile (no top navbar to balance against) so the hero
-     doesn't sit with a large empty gap above it. */
+  .hero__bg { background-image: url('/hero-mountains-portrait.webp'); background-position: center; }
+  /* Fill the first screen down to the fixed bottom nav. Top-align the text
+     (no top navbar to balance against) so it sits on the sky. */
   .hero {
-    min-height: 88svh;
+    min-height: calc(100svh - var(--nav-height));
     align-items: flex-start;
     padding-top: var(--space-8);
     padding-bottom: var(--space-10);

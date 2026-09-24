@@ -1,30 +1,9 @@
 import { useEffect, useRef } from 'react'
-import { Code2, Layers, Brain, Database, Wrench, Workflow } from 'lucide-react'
 import Section from '../components/Section.jsx'
+import TechChip from '../components/TechChip.jsx'
+import { categoryIcon } from '../lib/skillIcons.js'
 import { useLang } from '../i18n/LanguageProvider.jsx'
-import { TECH_ICONS } from '../lib/techIcons.js'
 import './Skills.css'
-
-/* Icon map for CATEGORY icons (Languages, Frameworks, …), used as the
-   fallback mark for skills without a brand logo. */
-const ICONS = { Code2, Layers, Brain, Database, Wrench, Workflow }
-
-/* Per-skill brand mark when one exists, else the category icon as a
-   neutral fallback (SQL, RunPod, JBoss, Unsloth, GWT, Mockito and a few
-   AI/ML terms have no logo in any icon set checked — see techIcons.js). */
-function SkillIcon({ name, CategoryIcon }) {
-  const brand = TECH_ICONS[name]
-  if (!brand) return <CategoryIcon size={16} strokeWidth={1.5} aria-hidden="true" className="skill-item__icon" />
-  return (
-    <svg
-      width={16} height={16} viewBox={brand.viewBox ?? '0 0 24 24'} fill="currentColor"
-      aria-hidden="true" focusable="false" className="skill-item__icon skill-item__icon--brand"
-      style={{ '--brand-hex': `#${brand.hex}` }}
-    >
-      <path d={brand.path} />
-    </svg>
-  )
-}
 
 /* Altitude by proficiency level (0-100, from the data) */
 const TIERS = [
@@ -115,7 +94,7 @@ export default function Skills() {
 
   const byTier = { base: [], halfway: [], summit: [] }
   content.skills.forEach((group) => {
-    const Icon = ICONS[group.icon] ?? Code2
+    const Icon = categoryIcon(group.icon)
     group.items.forEach((item) => byTier[tierOf(item.level)].push({ ...item, Icon }))
   })
   Object.values(byTier).forEach((list) => list.sort((a, b) => b.level - a.level))
@@ -146,10 +125,7 @@ export default function Skills() {
                   </h3>
                   <ul className="scamp__skills">
                     {byTier[key].map((item) => (
-                      <li key={item.name} className="skill-chip">
-                        <SkillIcon name={item.name} CategoryIcon={item.Icon} />
-                        {item.name}
-                      </li>
+                      <TechChip key={item.name} name={item.name} FallbackIcon={item.Icon} />
                     ))}
                   </ul>
                 </div>

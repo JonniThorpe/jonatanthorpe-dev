@@ -99,6 +99,9 @@
   padding: 0;
 }
 
+/* anchor target (#project-<id>, e.g. from Experience): clear the nav */
+.proj-grid__item { scroll-margin-top: calc(var(--nav-height) + var(--space-6)); }
+
 .proj-card {
   display: flex;
   flex-direction: column;

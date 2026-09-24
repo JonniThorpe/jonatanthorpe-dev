@@ -86,20 +86,31 @@ export const experience = [
     ...experienceEn[0],
     role: 'Programador Junior',
     location: 'España',
-    description:
-      'Desarrollo y mantenimiento backend en Java 8 con Spring y Oracle. Implementación de tests unitarios con Mockito, gestión de bases de datos y consultas SQL, despliegue en servidor JBoss con desarrollo de interfaz en GWT, y trabajo bajo metodología Scrum con Git.',
+    context: 'Galileo, el programa europeo de navegación por satélite (GNSS): un sistema multimódulo a gran escala con requisitos estrictos de fiabilidad.',
+    bullets: [
+      'Desarrollo y mantenimiento backend en Java 8 con Spring y Oracle.',
+      'Responsable de la integración de nuestro módulo con el resto del sistema, asegurando que los demás módulos se integraran correctamente con el nuestro.',
+      'Subí la cobertura de tests unitarios del 70% a más del 95% en los módulos a mi cargo (JUnit5, Mockito).',
+      'Gestión de bases de datos y consultas SQL, despliegue en servidor JBoss y desarrollo de interfaz en GWT, bajo Scrum con Git.',
+    ],
   },
   {
     ...experienceEn[1],
     role: 'Desarrollador de Aplicaciones Web',
     location: 'España',
-    description: 'Diseño y maquetación de páginas web, además de personalización del CRM Odoo.',
+    bullets: [
+      'Diseño y maquetación de páginas web.',
+      'Personalización del CRM Odoo.',
+    ],
   },
   {
     ...experienceEn[2],
     role: 'Programador en Prácticas',
     location: 'España',
-    description: 'Desarrollo individual de una aplicación web en ASP.NET, trabajando bajo metodología ágil Scrum.',
+    bullets: [
+      'Desarrollo individual de una aplicación web para digitalizar la gestión de una academia de inglés local.',
+      'Trabajo bajo metodología ágil Scrum.',
+    ],
   },
 ]
 
