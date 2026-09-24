@@ -131,8 +131,15 @@
 }
 
 /* The summit card (the strongest skills) is the goal of the climb and is
-   on screen from the start; only its flag waits for the trail to arrive. */
-.scamp--summit .scamp__card { opacity: 1; translate: none; }
+   on screen from the start, but muted (faded, greyscale icons); it lights
+   up when the trail and the flag arrive. Filter goes on the children so
+   the card's own backdrop blur keeps working. */
+.scamp--summit .scamp__card {
+  opacity: calc(0.6 + var(--shown) * 0.4);
+  translate: none;
+}
+
+.scamp--summit .scamp__card > * { filter: grayscale(calc(1 - var(--shown))); }
 
 /* Cards sit beside their camp without covering the trail: summit card in
    the sky above the peak, halfway to the right, base camp above-left. */
@@ -165,18 +172,6 @@
   padding: 0;
 }
 
-.skill-chip {
-  display: inline-flex;
-  align-items: center;
-  gap: var(--space-2);
-  padding: var(--space-1) var(--space-3);
-  font-family: var(--font-mono);
-  font-size: var(--text-xs);
-  background: var(--color-surface);
-  border: 1px solid var(--color-border);
-  border-radius: 999px;
-}
-
 /* Summit skills read a bit bigger: they're the headline */
 .scamp--summit .skill-chip { font-size: var(--text-sm); }
 
@@ -187,9 +182,6 @@
   .scamp--summit .skill-chip { font-size: var(--text-xs); }
   .scamp--halfway .scamp__card { top: -100px; }
 }
-
-.skill-item__icon { color: var(--color-text-secondary); flex-shrink: 0; }
-.skill-item__icon--brand { color: var(--brand-hex, var(--color-text-secondary)); }
 
 /* ---- Tablet / mobile: vertical climb, summit first ---------- */
 @media (max-width: 1100px) {

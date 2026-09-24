@@ -31,7 +31,7 @@ const uiEn = {
     read: 'Read the case study', showLess: 'Show less', stack: 'Stack',
     problem: 'Problem', approach: 'Approach', story: 'Debugging story', results: 'Results',
   },
-  experience: { eyebrow: 'Experience', title: 'Experience' },
+  experience: { eyebrow: 'Experience', title: 'Experience', month: 'month', months: 'months', seeProject: 'See the project' },
   studies: { eyebrow: 'Studies & certifications', title: 'Studies & certifications' },
   skills: {
     eyebrow: 'Skills', title: 'Skills',
@@ -71,13 +71,13 @@ const uiEs = {
     read: 'Ver el caso de estudio', showLess: 'Ver menos', stack: 'Stack',
     problem: 'Necesidad', approach: 'Enfoque', story: 'Historia de desarrollo', results: 'Resultados',
   },
-  experience: { eyebrow: 'Experiencia', title: 'Experiencia' },
+  experience: { eyebrow: 'Experiencia', title: 'Experiencia', month: 'mes', months: 'meses', seeProject: 'Ver el proyecto' },
   studies: { eyebrow: 'Formación académica', title: 'Formación académica' },
   skills: {
     eyebrow: 'Habilidades', title: 'Habilidades',
-    summit: 'Cima', summitDesc: 'Probadas en proyectos reales y documentadas',
-    halfway: 'Media ladera', halfwayDesc: 'Base sólida de trabajo',
-    base: 'Campo base', baseDesc: 'Usadas, sigo subiendo',
+    summit: 'Cima', summitDesc: 'Demostradas en proyectos reales y documentadas',
+    halfway: 'A mitad de camino', halfwayDesc: 'Buen dominio en el trabajo diario',
+    base: 'Campo base', baseDesc: 'Ya las uso y sigo subiendo',
   },
   hobbies: {
     eyebrow: 'Aficiones', title: 'Fuera del teclado',

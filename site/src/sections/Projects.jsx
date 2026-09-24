@@ -75,7 +75,7 @@ export default function Projects() {
       {/* Secondary grid */}
       <ul className="proj-grid">
         {projects.map((p) => (
-          <li key={p.id}>
+          <li key={p.id} id={`project-${p.id}`} className="proj-grid__item">
             <button className="proj-card" onClick={() => setOpenProject(p)} aria-haspopup="dialog">
               <span className="proj-card__media">
                 <img src={p.cover.src} alt={p.cover.alt} loading="lazy" />

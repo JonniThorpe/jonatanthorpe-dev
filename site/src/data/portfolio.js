@@ -100,36 +100,58 @@ export const projects = [
   },
 ]
 
+/* Newest first. start/end (YYYY-MM, inclusive) drive the route strip and
+   the duration; `dates` is the display label. `stack` names match the
+   skills data so chips share its icons. Sourced from cv-data.json. */
 export const experience = [
   {
     id: 'indra',
     company: 'Indra Producción Software',
+    short: 'Indra',
     role: 'Junior Developer',
     dates: 'Jan 2021 - Oct 2021',
+    start: '2021-01',
+    end: '2021-10',
     location: 'Spain',
-    logo: { src: 'https://placehold.co/48x48/F1F0EC/6B6862?text=I', alt: 'Indra logo' },
-    description:
-      'Backend development and maintenance in Java 8 with Spring and Oracle. Implemented unit tests with Mockito, managed databases and SQL queries, deployed on a JBoss server with GWT front-end development, and worked under Scrum with Git.',
+    context: 'Galileo, the European GNSS programme: a large-scale, multi-module system with strict reliability requirements.',
+    bullets: [
+      'Backend development and maintenance in Java 8 with Spring and Oracle.',
+      'Owned the integration of our module with the rest of the system, making sure every other module integrated correctly with ours.',
+      'Raised unit test coverage from 70% to over 95% on the modules I owned (JUnit5, Mockito).',
+      'Database management and SQL queries, deployment on a JBoss server and front-end work in GWT, under Scrum with Git.',
+    ],
+    stack: ['Java', 'Spring', 'Oracle', 'SQL', 'Mockito', 'JBoss', 'GWT', 'Git', 'Scrum/Agile'],
   },
   {
     id: 'all-natura',
     company: 'All Natura S.L.',
+    short: 'All Natura',
     role: 'Web Application Developer',
     dates: 'Oct 2020 - Jan 2021',
+    start: '2020-10',
+    end: '2021-01',
     location: 'Spain',
-    logo: { src: 'https://placehold.co/48x48/F1F0EC/6B6862?text=A', alt: 'All Natura logo' },
-    description:
-      'Web page design and layout, plus customisation of the Odoo CRM.',
+    bullets: [
+      'Web page design and layout.',
+      'Customisation of the Odoo CRM.',
+    ],
+    stack: ['HTML/CSS', 'Odoo'],
   },
   {
     id: 'star-group',
     company: 'Star-Group',
+    short: 'Star-Group',
     role: 'Developer Intern',
     dates: 'Apr 2020 - Jun 2020',
+    start: '2020-04',
+    end: '2020-06',
     location: 'Spain',
-    logo: { src: 'https://placehold.co/48x48/F1F0EC/6B6862?text=S', alt: 'Star-Group logo' },
-    description:
-      'Individual development of a web application in ASP.NET, working under agile Scrum methodology.',
+    bullets: [
+      'Individual development of a web application to digitalise the management of a local English academy.',
+      'Worked under agile Scrum methodology.',
+    ],
+    stack: ['C#', 'ASP.NET', 'SQL Server', 'Scrum/Agile'],
+    project: 'english-academy', // links to the project card
   },
 ]
 

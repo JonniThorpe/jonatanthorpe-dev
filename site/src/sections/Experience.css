@@ -1,144 +1,183 @@
-.xp {
+/* ============================================================
+   Experience — the career as a route, then one open card per job.
+   ============================================================ */
+
+/* ---- Route strip: legs sized by duration on a time axis ---- */
+.xroute {
   position: relative;
+  /* room for the labels above and below the track */
+  padding-block: var(--space-6);
+  margin-bottom: var(--space-8);
+}
+
+/* dashed guide = the trail between jobs (same look as Skills) */
+.xroute__track {
+  position: relative;
+  height: 6px;
+  background: repeating-linear-gradient(90deg,
+    color-mix(in srgb, var(--color-text) 25%, transparent) 0 4px, transparent 4px 11px);
+  background-size: 100% 2px;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.xroute__leg {
+  position: absolute;
+  top: 0;
+  height: 100%;
+  border-radius: 999px;
+  background: var(--color-accent-secondary);
+  /* 1-month overlaps (same month on both jobs) stay visually separate */
+  box-shadow: 0 0 0 2px var(--color-bg);
+}
+
+.section:nth-of-type(even) .xroute__leg { box-shadow: 0 0 0 2px var(--color-surface); }
+
+/* camp marker at the start of each leg */
+.xroute__leg::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 50%;
+  width: 12px;
+  height: 12px;
+  translate: -50% -50%;
+  border-radius: 50%;
+  background: var(--color-bg);
+  border: 3px solid var(--color-accent-secondary);
+}
+
+.xroute__label {
+  position: absolute;
+  left: 0;
+  white-space: nowrap;
+  color: var(--color-text);
+}
+
+/* alternate sides so short, close legs don't collide */
+.xroute__leg--above .xroute__label { bottom: calc(100% + var(--space-3)); }
+.xroute__leg--below .xroute__label { top: calc(100% + var(--space-3)); }
+
+.xroute__years {
+  position: relative;
+  height: 0;
+}
+
+.xroute__year {
+  position: absolute;
+  top: var(--space-8);
+  padding-left: var(--space-2);
+  border-left: 1px solid var(--color-border);
+  line-height: 1;
+}
+
+/* ---- Cards: newest spans the full width, the rest side by side ---- */
+.xp {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-5);
   list-style: none;
   margin: 0;
   padding: 0;
 }
 
-/* Central vertical line */
-.xp::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 50%;
-  width: 2px;
-  transform: translateX(-50%);
-  background: var(--color-border);
-}
-
-.xp__item {
-  position: relative;
-  width: 50%;
-  box-sizing: border-box;
-  margin-bottom: var(--space-6);
-}
-
-.xp__item:last-child { margin-bottom: 0; }
-
-.xp__item--left {
-  left: 0;
-  padding-right: var(--space-8);
-}
-
-.xp__item--right {
-  left: 50%;
-  padding-left: var(--space-8);
-}
-
-/* Node on the central line */
-.xp__marker {
-  position: absolute;
-  top: 22px;
-  width: 14px;
-  height: 14px;
-  border-radius: 50%;
-  background: var(--color-accent);
-  border: 3px solid var(--color-bg);
-  box-shadow: 0 0 0 1px var(--color-border);
-  z-index: 1;
-}
-
-.xp__item--left .xp__marker { right: -7px; }
-.xp__item--right .xp__marker { left: -7px; }
-
-/* Accent the open node */
-.xp__item.is-open .xp__marker { background: var(--color-accent-secondary); }
+.xp__item:first-child { grid-column: 1 / -1; }
 
 .xp__card {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  padding: var(--space-5) var(--space-6);
   border: 1px solid var(--color-border);
-  border-radius: var(--radius-md);
+  border-radius: var(--radius-lg);
   background: var(--color-bg);
-  overflow: hidden;
-  transition: box-shadow var(--duration-base) var(--ease-standard),
-              border-color var(--duration-base) var(--ease-standard);
+  box-shadow: var(--shadow-card);
 }
 
 .section:nth-of-type(even) .xp__card { background: var(--color-surface); }
 
-.xp__item.is-open .xp__card {
-  border-color: var(--color-accent);
-  box-shadow: var(--shadow-lift);
-}
-
+/* Meta (dates · duration · place) under the title; only the full-width
+   card has room for it on the right */
 .xp__head {
   display: grid;
-  grid-template-columns: 44px 1fr auto;
+  grid-template-columns: auto 1fr;
   align-items: center;
-  gap: var(--space-3);
-  width: 100%;
-  padding: var(--space-4);
-  text-align: left;
-  background: none;
-  border: none;
-  cursor: pointer;
-  color: inherit;
-  font: inherit;
+  gap: var(--space-2) var(--space-4);
 }
 
-.xp__logo {
+.xp__meta { grid-column: 1 / -1; }
+
+@media (min-width: 901px) {
+  .xp__item:first-child .xp__head { grid-template-columns: auto 1fr auto; }
+  .xp__item:first-child .xp__meta { grid-column: auto; text-align: right; }
+}
+
+/* Monogram in place of a logo */
+.xp__mark {
+  display: grid;
+  place-items: center;
   width: 44px;
   height: 44px;
   border-radius: var(--radius-md);
-  border: 1px solid var(--color-border);
-  object-fit: cover;
-  background: var(--color-surface);
-}
-
-.xp__heading { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
-
-.xp__role {
   font-family: var(--font-display);
   font-weight: var(--weight-semibold);
-  font-size: var(--text-base);
+  font-size: var(--text-lg);
+  color: var(--color-accent-contrast);
+  background: var(--color-accent);
 }
 
-.xp__company { color: var(--color-accent); font-weight: var(--weight-medium); }
+.xp__heading { min-width: 0; }
 
-.xp__meta { color: var(--color-text-secondary); }
+.xp__role {
+  font-size: var(--text-md);
+}
 
-.xp__chev {
+.xp__company {
+  color: var(--color-accent);
+  font-weight: var(--weight-medium);
+}
+
+.xp__context {
+  color: var(--color-text);
+  font-style: italic;
+  max-width: 70ch;
+}
+
+.xp__bullets {
+  margin: 0;
+  padding-left: 1.2em;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
   color: var(--color-text-secondary);
-  transition: transform var(--duration-base) var(--ease-standard);
+  max-width: 70ch;
 }
 
-.xp__item.is-open .xp__chev { transform: rotate(180deg); color: var(--color-accent); }
+.xp__bullets li::marker { color: var(--color-accent-secondary); }
 
-.xp__detail {
-  padding: 0 var(--space-4) var(--space-4);
-  color: var(--color-text-secondary);
+.xp__stack {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  list-style: none;
+  margin: auto 0 0; /* stick to the card's bottom when rows are uneven */
+  padding: 0;
 }
 
-.xp__detail p { max-width: 60ch; }
+.xp__link {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-1);
+  align-self: flex-start;
+  font-weight: var(--weight-medium);
+}
 
-/* ============================================================
-   Mobile — single left rail, no alternating
-   ============================================================ */
-@media (max-width: 768px) {
-  .xp::before { left: 7px; transform: none; }
+/* ---- Tablet / mobile ------------------------------------- */
+@media (max-width: 900px) {
+  .xp { grid-template-columns: 1fr; }
+}
 
-  .xp__item,
-  .xp__item--left,
-  .xp__item--right {
-    width: 100%;
-    left: 0;
-    padding-left: var(--space-6);
-    padding-right: 0;
-  }
-
-  .xp__item--left .xp__marker,
-  .xp__item--right .xp__marker {
-    left: 0;
-    right: auto;
-  }
+@media (max-width: 640px) {
+  .xp__card { padding: var(--space-4); }
 }
