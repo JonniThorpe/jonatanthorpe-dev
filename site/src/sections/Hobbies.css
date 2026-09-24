@@ -105,6 +105,11 @@
   z-index: 2;
 }
 
+/* Edge books: pin the tip to the book's outer side so it can't overhang the
+   viewport (an invisible overhang still widens the page on mobile) */
+.hshelf__book:first-child .hshelf__tip { left: 0; translate: none; }
+.hshelf__book:last-child .hshelf__tip { left: auto; right: 0; translate: none; }
+
 .hshelf__book:hover .hshelf__tip,
 .hshelf__book:focus-visible .hshelf__tip { opacity: 1; }
 
