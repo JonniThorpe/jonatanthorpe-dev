@@ -67,6 +67,7 @@ export const projects = [
     idea: 'Capture messages via the WhatsApp Web API (Meta) and use the DeepSeek API to categorise and interpret the natural language, generating structured orders automatically.',
     stack: ['Spring Boot', 'React', 'MySQL', 'WhatsApp Web API', 'DeepSeek API', 'JWT', 'Docker'],
     link: { label: 'Code', href: 'https://github.com/jtp703/PedidosTwilio/tree/Peidilio_Refactorizaci%C3%B3n_React' },
+    demo: { label: 'Try the demo', note: 'Interactive demo: a 3-minute guided tutorial with sample data.', href: 'https://demo.jonatanthorpe.dev' },
   },
   {
     id: 'portfolio-infra',

@@ -54,6 +54,7 @@ export const projects = [
     need: 'Los pedidos llegaban como mensajes informales de WhatsApp y requerían transcripción manual.',
     idea: 'Capturar los mensajes con la API de WhatsApp Web (Meta) y usar la API de DeepSeek para categorizar e interpretar el lenguaje natural, generando pedidos estructurados de forma automática.',
     link: { label: 'Código', href: projectsEn[0].link.href },
+    demo: { label: 'Probar la demo', note: 'Demo interactiva: un tutorial guiado de 3 minutos con datos ficticios.', href: projectsEn[0].demo.href },
   },
   {
     ...projectsEn[3],

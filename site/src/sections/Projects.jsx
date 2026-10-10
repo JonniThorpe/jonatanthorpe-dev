@@ -110,9 +110,22 @@ export default function Projects() {
               <p>{openProject.idea}</p>
             </>
           )}
-          <a className="btn btn--primary" href={openProject.link.href} target="_blank" rel="noopener noreferrer">
-            {openProject.link.label} <ExternalLink size={16} strokeWidth={1.75} />
-          </a>
+          {openProject.demo && <p className="proj-modal__demo-note">{openProject.demo.note}</p>}
+          <div className="featured__links">
+            {openProject.demo && (
+              <a className="btn btn--primary" href={openProject.demo.href} target="_blank" rel="noopener noreferrer">
+                {openProject.demo.label} <ExternalLink size={16} strokeWidth={1.75} />
+              </a>
+            )}
+            <a
+              className={`btn ${openProject.demo ? 'btn--ghost' : 'btn--primary'}`}
+              href={openProject.link.href}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              {openProject.link.label} <ExternalLink size={16} strokeWidth={1.75} />
+            </a>
+          </div>
         </Modal>
       )}
     </Section>
