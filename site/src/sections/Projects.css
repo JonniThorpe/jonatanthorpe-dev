@@ -166,6 +166,7 @@
 .proj-modal__img { width: 100%; border-radius: var(--radius-md); margin-bottom: var(--space-5); }
 .proj-modal__title { margin-bottom: var(--space-3); }
 .proj-modal__summary { margin-block: var(--space-4) var(--space-5); color: var(--color-text); }
+.proj-modal__demo-note { margin-bottom: var(--space-3); }
 
 /* ---- Responsive ----------------------------------------- */
 @media (max-width: 860px) {
