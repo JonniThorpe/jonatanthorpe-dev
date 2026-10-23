@@ -1,3 +1,4 @@
+import { Fragment } from 'react'
 import { ArrowRight } from 'lucide-react'
 import Section from '../components/Section.jsx'
 import TechChip from '../components/TechChip.jsx'
@@ -14,89 +15,72 @@ const monthIndex = (ym) => {
 /* Inclusive month count (Jan-Oct = 10), the usual CV/LinkedIn convention */
 const monthsOf = (job) => monthIndex(job.end) - monthIndex(job.start) + 1
 
-/* Route strip: each job is a leg of the trail, as wide as its duration,
-   placed on a shared time axis (gaps show as dashed trail). Decorative:
-   the cards below carry the same information for screen readers. */
-function Route({ jobs }) {
-  const from = Math.min(...jobs.map((j) => monthIndex(j.start)))
-  const to = Math.max(...jobs.map((j) => monthIndex(j.end))) + 1
-  const share = (months) => `${(months / (to - from)) * 100}%`
-  const pct = (i) => share(i - from)
-
-  const years = []
-  for (let y = Math.floor(from / 12); y * 12 < to; y++) {
-    years.push({ year: y, at: pct(Math.max(y * 12, from)) })
-  }
-
-  return (
-    <div className="xroute" aria-hidden="true">
-      <div className="xroute__track">
-        {[...jobs].reverse().map((job, i) => (
-          <span
-            key={job.id}
-            className={`xroute__leg xroute__leg--${i % 2 ? 'below' : 'above'}`}
-            style={{ left: pct(monthIndex(job.start)), width: share(monthsOf(job)) }}
-          >
-            <span className="xroute__label u-mono">{job.short}</span>
-          </span>
-        ))}
-      </div>
-      <div className="xroute__years">
-        {years.map(({ year, at }) => (
-          <span key={year} className="xroute__year u-mono" style={{ left: at }}>{year}</span>
-        ))}
-      </div>
-    </div>
-  )
+/* 'YYYY-MM' → 'Jan 2021' / 'ene 2021', built from the data instead of a
+   hand-written string so both languages stay consistent */
+const formatMonth = (ym, lang) => {
+  const [y, m] = ym.split('-').map(Number)
+  return new Intl.DateTimeFormat(lang, { month: 'short', year: 'numeric' })
+    .format(new Date(y, m - 1))
+    .replace('.', '')
 }
 
-/* Experience — the career as a route (legs sized by duration), then one
-   open card per job: context, what I did, stack. Newest first; the newest
-   spans the full width. */
+/* Experience — vertical timeline, newest first. Each stop pairs its dates
+   and duration (left) with the job card (right), joined by a rail; time
+   between two jobs shows as a dashed stretch of the rail. */
 export default function Experience() {
-  const { content, ui } = useLang()
+  const { content, ui, lang } = useLang()
   const jobs = content.experience
   const icons = iconsBySkill(content.skills)
   const t = ui.experience
 
   return (
     <Section id="experience" eyebrow={t.eyebrow} title={t.title} wide>
-      <Route jobs={jobs} />
-
-      <ol className="xp">
-        {jobs.map((job) => {
+      <ol className="xtl">
+        {jobs.map((job, i) => {
           const n = monthsOf(job)
+          const older = jobs[i + 1]
+          const gap = older && monthIndex(job.start) - monthIndex(older.end) > 1
           return (
-            <li key={job.id} className="xp__item">
-              <article className="xp__card" aria-labelledby={`xp-${job.id}`}>
-                <header className="xp__head">
-                  <span className="xp__mark" aria-hidden="true">{job.short[0]}</span>
-                  <div className="xp__heading">
-                    <h3 id={`xp-${job.id}`} className="xp__role">{job.role}</h3>
-                    <p className="xp__company">{job.company}</p>
-                  </div>
-                  <p className="xp__meta u-mono">
-                    {job.dates} · {n} {n === 1 ? t.month : t.months} · {job.location}
-                  </p>
-                </header>
+            <Fragment key={job.id}>
+              <li className="xtl__item">
+                <p className="xtl__when u-mono">
+                  <span className="xtl__from">{formatMonth(job.start, lang)}</span>
+                  <span className="xtl__to">→ {formatMonth(job.end, lang)}</span>
+                  <span className="xtl__dur">{n} {n === 1 ? t.month : t.months}</span>
+                </p>
 
-                {job.context && <p className="xp__context">{job.context}</p>}
+                <span className="xtl__rail" aria-hidden="true"><span className="xtl__dot" /></span>
 
-                <ul className="xp__bullets">
-                  {job.bullets.map((b) => <li key={b}>{b}</li>)}
-                </ul>
+                <article className="xp__card" aria-labelledby={`xp-${job.id}`}>
+                  <header className="xp__head">
+                    <span className="xp__mark" aria-hidden="true">{job.short[0]}</span>
+                    <div className="xp__heading">
+                      <h3 id={`xp-${job.id}`} className="xp__role">{job.role}</h3>
+                      <p className="xp__company">
+                        {job.company} <span className="xp__place">· {job.location}</span>
+                      </p>
+                    </div>
+                  </header>
 
-                <ul className="xp__stack">
-                  {job.stack.map((name) => <TechChip key={name} name={name} FallbackIcon={icons[name]} />)}
-                </ul>
+                  {job.context && <p className="xp__context">{job.context}</p>}
 
-                {job.project && (
-                  <a className="xp__link" href={`#project-${job.project}`}>
-                    {t.seeProject} <ArrowRight size={16} strokeWidth={1.75} aria-hidden="true" />
-                  </a>
-                )}
-              </article>
-            </li>
+                  <ul className="xp__bullets">
+                    {job.bullets.map((b) => <li key={b}>{b}</li>)}
+                  </ul>
+
+                  <ul className="xp__stack">
+                    {job.stack.map((name) => <TechChip key={name} name={name} FallbackIcon={icons[name]} />)}
+                  </ul>
+
+                  {job.project && (
+                    <a className="xp__link" href={`#project-${job.project}`}>
+                      {t.seeProject} <ArrowRight size={16} strokeWidth={1.75} aria-hidden="true" />
+                    </a>
+                  )}
+                </article>
+              </li>
+              {gap && <li className="xtl__gap" aria-hidden="true"><span className="xtl__rail" /></li>}
+            </Fragment>
           )
         })}
       </ol>
