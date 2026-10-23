@@ -1,0 +1,145 @@
+/* ============================================================
+   HobbyMarquee — tagline box + endless strip of hobby covers
+   ============================================================ */
+
+/* Starts aligned with the section content and bleeds to the right edge of
+   the viewport, so items slide in from the screen edge (not from inside a
+   box). Hence only the left corners are rounded and there is no right border.
+   The bleed relies on html { overflow-x: clip } (index.css). */
+.hmarquee {
+  display: flex;
+  margin-top: var(--space-6);
+  margin-right: calc(50% - 50vw);
+  overflow: hidden;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-right: 0;
+  border-radius: var(--radius-lg) 0 0 var(--radius-lg);
+}
+
+.hmarquee__tagline {
+  flex: 0 0 auto;
+  max-width: 20rem;
+  margin: 0;
+  padding: var(--space-8);
+  border-right: 1px solid var(--color-border);
+  font-size: var(--text-base);
+  line-height: var(--leading-snug);
+  text-transform: uppercase;
+  text-wrap: balance;
+  color: var(--color-text);
+  display: flex;
+  align-items: center;
+}
+
+/* Fade the left edge (items leaving behind the tagline) and the right screen
+   edge. The mask only touches alpha, so it works in light and dark themes. */
+.hmarquee__viewport {
+  flex: 1;
+  min-width: 0;
+  display: flex; /* stretch the track so item dividers span the full height */
+  overflow: hidden;
+  mask-image: linear-gradient(to right, transparent, #000 6%, #000 94%, transparent);
+}
+
+/* Hover nudges the whole strip a little and pauses the loop */
+.hmarquee__track {
+  display: flex;
+  width: max-content;
+  transition: transform 2s var(--ease-out);
+}
+.hmarquee__viewport:hover .hmarquee__track {
+  transform: translateX(-1rem);
+  transition-duration: 1s;
+}
+
+.hmarquee__list {
+  display: flex;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  animation: hmarquee-x 70s linear infinite;
+}
+.hmarquee__viewport:hover .hmarquee__list { animation-play-state: paused; }
+
+.hmarquee__item {
+  --media-h: 96px; /* every item shares one media slot height */
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+  padding: var(--space-6) var(--space-10);
+  border-right: 1px solid var(--color-border);
+  transition: background var(--duration-base) var(--ease-standard);
+}
+
+/* Fixed-height slot: books fill it at 2:3, square thumbs sit at 5/6 of it,
+   so covers and photos read as one consistent row whatever the source size */
+.hmarquee__media {
+  display: flex;
+  align-items: center;
+  height: var(--media-h);
+  flex-shrink: 0;
+}
+.hmarquee__media img {
+  display: block;
+  height: calc(var(--media-h) * 5 / 6);
+  aspect-ratio: 1;
+  object-fit: cover;
+  border-radius: var(--radius-md);
+}
+.hmarquee__item--book .hmarquee__media img {
+  height: var(--media-h);
+  aspect-ratio: 2 / 3;
+  border-radius: 2px 4px 4px 2px;
+  box-shadow: var(--shadow-card);
+}
+
+.hmarquee__text {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+}
+
+/* Kind label: space reserved, revealed on hover so the row never shifts */
+.hmarquee__kind {
+  font-size: var(--text-xs);
+  text-transform: uppercase;
+  color: var(--color-accent-secondary);
+  opacity: 0;
+  translate: 0 4px;
+  transition: opacity var(--duration-fast) var(--ease-standard),
+              translate var(--duration-fast) var(--ease-standard);
+}
+
+.hmarquee__name {
+  font-size: var(--text-sm);
+  color: var(--color-text-secondary);
+  white-space: nowrap;
+  transition: color var(--duration-fast) var(--ease-standard);
+}
+
+.hmarquee__item:hover { background: var(--color-bg); }
+.hmarquee__item:hover .hmarquee__kind { opacity: 1; translate: 0 0; }
+.hmarquee__item:hover .hmarquee__name { color: var(--color-text); }
+
+@keyframes hmarquee-x { to { transform: translateX(-100%); } }
+
+/* No motion: static strip the user can scroll by hand; drop the copy */
+@media (prefers-reduced-motion: reduce) {
+  .hmarquee__list { animation: none; }
+  .hmarquee__list + .hmarquee__list { display: none; }
+  .hmarquee__track { transition: none; }
+  .hmarquee__viewport { overflow-x: auto; }
+  .hmarquee__item, .hmarquee__kind, .hmarquee__name { transition: none; }
+}
+
+/* Mobile: edge to edge on both sides, so no rounded corners or side borders */
+@media (max-width: 640px) {
+  .hmarquee {
+    margin-left: calc(50% - 50vw);
+    border-inline: 0;
+    border-radius: 0;
+  }
+  .hmarquee__tagline { display: none; }
+  .hmarquee__item { --media-h: 78px; padding: var(--space-5) var(--space-6); }
+}

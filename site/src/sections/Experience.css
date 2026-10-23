@@ -1,90 +1,84 @@
 /* ============================================================
-   Experience — the career as a route, then one open card per job.
+   Experience — vertical timeline: dates | rail | card
    ============================================================ */
 
-/* ---- Route strip: legs sized by duration on a time axis ---- */
-.xroute {
-  position: relative;
-  /* room for the labels above and below the track */
-  padding-block: var(--space-6);
-  margin-bottom: var(--space-8);
-}
-
-/* dashed guide = the trail between jobs (same look as Skills) */
-.xroute__track {
-  position: relative;
-  height: 6px;
-  background: repeating-linear-gradient(90deg,
-    color-mix(in srgb, var(--color-text) 25%, transparent) 0 4px, transparent 4px 11px);
-  background-size: 100% 2px;
-  background-position: center;
-  background-repeat: no-repeat;
-}
-
-.xroute__leg {
-  position: absolute;
-  top: 0;
-  height: 100%;
-  border-radius: 999px;
-  background: var(--color-accent-secondary);
-  /* 1-month overlaps (same month on both jobs) stay visually separate */
-  box-shadow: 0 0 0 2px var(--color-bg);
-}
-
-.section:nth-of-type(even) .xroute__leg { box-shadow: 0 0 0 2px var(--color-surface); }
-
-/* camp marker at the start of each leg */
-.xroute__leg::before {
-  content: '';
-  position: absolute;
-  left: 0;
-  top: 50%;
-  width: 12px;
-  height: 12px;
-  translate: -50% -50%;
-  border-radius: 50%;
-  background: var(--color-bg);
-  border: 3px solid var(--color-accent-secondary);
-}
-
-.xroute__label {
-  position: absolute;
-  left: 0;
-  white-space: nowrap;
-  color: var(--color-text);
-}
-
-/* alternate sides so short, close legs don't collide */
-.xroute__leg--above .xroute__label { bottom: calc(100% + var(--space-3)); }
-.xroute__leg--below .xroute__label { top: calc(100% + var(--space-3)); }
-
-.xroute__years {
-  position: relative;
-  height: 0;
-}
-
-.xroute__year {
-  position: absolute;
-  top: var(--space-8);
-  padding-left: var(--space-2);
-  border-left: 1px solid var(--color-border);
-  line-height: 1;
-}
-
-/* ---- Cards: newest spans the full width, the rest side by side ---- */
-.xp {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: var(--space-5);
+.xtl {
+  --when-w: 9rem;
+  --rail-w: 2.5rem;
+  --stop-gap: var(--space-6);
+  --dot-top: calc(var(--space-5) + 22px); /* card padding + half the monogram */
   list-style: none;
   margin: 0;
   padding: 0;
 }
 
-.xp__item:first-child { grid-column: 1 / -1; }
+.xtl__item {
+  display: grid;
+  grid-template-columns: var(--when-w) var(--rail-w) 1fr;
+  padding-bottom: var(--stop-gap);
+}
+.xtl__item:last-child { padding-bottom: 0; }
 
+/* ---- Dates: start, end and duration, level with the card head ---- */
+.xtl__when {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+  margin: 0;
+  padding-top: calc(var(--dot-top) - 0.75em);
+  text-align: right;
+  text-transform: uppercase;
+}
+.xtl__from { font-size: var(--text-base); color: var(--color-text); }
+.xtl__to { font-size: var(--text-sm); color: var(--color-text-secondary); }
+.xtl__dur { font-size: var(--text-xs); color: var(--color-accent-secondary); margin-top: var(--space-1); }
+
+/* ---- Rail: one line through every stop, a dot at each card head ---- */
+.xtl__rail { position: relative; }
+.xtl__rail::before {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 0;
+  bottom: calc(-1 * var(--stop-gap)); /* run through the spacing to the next stop */
+  width: 2px;
+  translate: -50% 0;
+  background: var(--color-accent-secondary);
+}
+.xtl__item:first-child .xtl__rail::before { top: var(--dot-top); }
+.xtl__item:last-child .xtl__rail::before { bottom: auto; height: var(--dot-top); }
+
+.xtl__dot {
+  position: absolute;
+  left: 50%;
+  top: var(--dot-top);
+  width: 14px;
+  height: 14px;
+  translate: -50% -50%;
+  border-radius: 50%;
+  background: var(--color-bg);
+  border: 3px solid var(--color-accent-secondary);
+}
+.section:nth-of-type(even) .xtl__dot { background: var(--color-surface); }
+
+/* Time without a job between two stops: dashed stretch of the rail */
+.xtl__gap {
+  display: grid;
+  grid-template-columns: var(--when-w) var(--rail-w);
+  height: var(--space-10);
+  margin-bottom: var(--stop-gap);
+}
+.xtl__gap .xtl__rail { grid-column: 2; }
+.xtl__gap .xtl__rail::before {
+  background: repeating-linear-gradient(to bottom,
+    color-mix(in srgb, var(--color-text) 30%, transparent) 0 4px, transparent 4px 10px);
+}
+/* the stop above ends its solid line where the dashes begin */
+.xtl__item:has(+ .xtl__gap) { padding-bottom: 0; }
+.xtl__item:has(+ .xtl__gap) .xtl__rail::before { bottom: 0; }
+
+/* ---- Card ---- */
 .xp__card {
-  height: 100%;
   display: flex;
   flex-direction: column;
   gap: var(--space-4);
@@ -97,20 +91,11 @@
 
 .section:nth-of-type(even) .xp__card { background: var(--color-surface); }
 
-/* Meta (dates · duration · place) under the title; only the full-width
-   card has room for it on the right */
 .xp__head {
   display: grid;
   grid-template-columns: auto 1fr;
   align-items: center;
-  gap: var(--space-2) var(--space-4);
-}
-
-.xp__meta { grid-column: 1 / -1; }
-
-@media (min-width: 901px) {
-  .xp__item:first-child .xp__head { grid-template-columns: auto 1fr auto; }
-  .xp__item:first-child .xp__meta { grid-column: auto; text-align: right; }
+  gap: var(--space-4);
 }
 
 /* Monogram in place of a logo */
@@ -137,6 +122,7 @@
   color: var(--color-accent);
   font-weight: var(--weight-medium);
 }
+.xp__place { color: var(--color-text-secondary); font-weight: normal; }
 
 .xp__context {
   color: var(--color-text);
@@ -161,7 +147,7 @@
   flex-wrap: wrap;
   gap: var(--space-2);
   list-style: none;
-  margin: auto 0 0; /* stick to the card's bottom when rows are uneven */
+  margin: 0;
   padding: 0;
 }
 
@@ -173,11 +159,23 @@
   font-weight: var(--weight-medium);
 }
 
-/* ---- Tablet / mobile ------------------------------------- */
-@media (max-width: 900px) {
-  .xp { grid-template-columns: 1fr; }
-}
-
+/* ---- Mobile: rail on the left, dates on one line above each card ---- */
 @media (max-width: 640px) {
-  .xp__card { padding: var(--space-4); }
+  .xtl { --rail-w: 1.75rem; --dot-top: 0.7em; }
+  .xtl__item { grid-template-columns: var(--rail-w) 1fr; }
+  .xtl__rail { grid-row: 1 / span 2; grid-column: 1; }
+  .xtl__when {
+    grid-column: 2;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: var(--space-2);
+    padding: 0 0 var(--space-3);
+    text-align: left;
+  }
+  .xtl__dur { margin-top: 0; }
+  .xtl__dur::before { content: '· '; }
+  .xp__card { grid-column: 2; padding: var(--space-4); }
+  .xtl__gap { grid-template-columns: var(--rail-w); }
+  .xtl__gap .xtl__rail { grid-column: 1; }
 }

@@ -152,6 +152,7 @@ export const hobbies = {
     { ...hobbiesEn.Books[4], title: 'Meditaciones de Marco Aurelio' },
     { ...hobbiesEn.Books[5], title: 'Los trucos de los ricos' },
     { ...hobbiesEn.Books[6], title: 'El obstáculo es el camino' },
+    { ...hobbiesEn.Books[7], title: 'Greenlights' },
   ],
   Podcasts: hobbiesEn.Podcasts,
   Sport: [

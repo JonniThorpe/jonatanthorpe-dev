@@ -22,13 +22,13 @@ const contentEs = {
 const uiEn = {
   nav: {
     hero: 'Home', about: 'About', projects: 'Projects', experience: 'Experience',
-    studies: 'Studies', skills: 'Skills', hobbies: 'Hobbies', contact: 'Contact',
+    studies: 'Studies', skills: 'Skills', contact: 'Contact',
   },
   hero: { downloadCv: 'Download CV', contact: 'Contact' },
   about: { eyebrow: 'About', title: 'About me' },
   projects: {
     eyebrow: 'Projects', title: 'Projects', featured: 'Featured case study',
-    read: 'Read the case study', showLess: 'Show less', stack: 'Stack',
+    stack: 'Stack',
     problem: 'Problem', approach: 'Approach', story: 'Debugging story', results: 'Results',
   },
   experience: { eyebrow: 'Experience', title: 'Experience', month: 'month', months: 'months', seeProject: 'See the project' },
@@ -40,8 +40,8 @@ const uiEn = {
     base: 'Base camp', baseDesc: 'Used, still climbing',
   },
   hobbies: {
-    eyebrow: 'Hobbies', title: 'Off the keyboard',
-    reading: 'Reading now', shelf: 'On the shelf', listening: 'Listening to', moving: 'On the move',
+    kinds: { book: 'Book', podcast: 'Podcast', sport: 'Sport' },
+    tagline: 'Powering my ideas & health',
   },
   contact: {
     eyebrow: 'Contact', title: 'Get in touch',
@@ -62,13 +62,13 @@ const uiEn = {
 const uiEs = {
   nav: {
     hero: 'Inicio', about: 'Sobre mí', projects: 'Proyectos', experience: 'Experiencia',
-    studies: 'Estudios', skills: 'Habilidades', hobbies: 'Aficiones', contact: 'Contacto',
+    studies: 'Estudios', skills: 'Habilidades', contact: 'Contacto',
   },
   hero: { downloadCv: 'Descargar CV', contact: 'Contacto' },
   about: { eyebrow: 'Sobre mí', title: 'Sobre mí' },
   projects: {
     eyebrow: 'Proyectos', title: 'Proyectos', featured: 'Caso de estudio destacado',
-    read: 'Ver el caso de estudio', showLess: 'Ver menos', stack: 'Stack',
+    stack: 'Stack',
     problem: 'Necesidad', approach: 'Enfoque', story: 'Historia de desarrollo', results: 'Resultados',
   },
   experience: { eyebrow: 'Experiencia', title: 'Experiencia', month: 'mes', months: 'meses', seeProject: 'Ver el proyecto' },
@@ -80,8 +80,8 @@ const uiEs = {
     base: 'Campo base', baseDesc: 'Ya las uso y sigo subiendo',
   },
   hobbies: {
-    eyebrow: 'Aficiones', title: 'Fuera del teclado',
-    reading: 'Leyendo ahora', shelf: 'En la estantería', listening: 'Escuchando', moving: 'En movimiento',
+    kinds: { book: 'Libro', podcast: 'Podcast', sport: 'Deporte' },
+    tagline: 'Impulsando mis ideas y mi salud',
   },
   contact: {
     eyebrow: 'Contacto', title: 'Ponte en contacto',

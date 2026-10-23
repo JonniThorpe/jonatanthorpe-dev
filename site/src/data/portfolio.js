@@ -61,7 +61,7 @@ export const projects = [
   {
     id: 'ai-order-automation',
     name: 'AI Order Automation',
-    cover: { src: '/projects/AutomatizacionIA.webp', alt: 'AI order automation interface screenshot' },
+    cover: { src: '/projects/AutomatizacionIA.png', alt: 'AI order automation interface screenshot' },
     summary: 'Turns informal WhatsApp order messages into structured orders automatically, using the WhatsApp Web API and DeepSeek for categorisation.',
     need: 'Orders arrived as informal WhatsApp messages and required manual transcription.',
     idea: 'Capture messages via the WhatsApp Web API (Meta) and use the DeepSeek API to categorise and interpret the natural language, generating structured orders automatically.',
@@ -72,7 +72,7 @@ export const projects = [
   {
     id: 'portfolio-infra',
     name: 'Self-hosted portfolio',
-    cover: { src: '/projects/Portfolio.webp', alt: 'Self-hosted portfolio screenshot' },
+    cover: { src: '/projects/Portfolio.png', alt: 'Self-hosted portfolio screenshot' },
     summary: 'This site, provisioned, hardened and deployed on a bare VPS with nginx, TLS and a custom CI pipeline.',
     need: 'Build DevOps skills hands-on in a real project running in production.',
     idea: 'Leverage my personal portfolio to self-manage the full cycle (server, TLS, CI/CD, hardening) and set it up to deploy future web apps.',
@@ -82,7 +82,7 @@ export const projects = [
   {
     id: 'english-academy',
     name: 'English Academy Web App',
-    cover: { src: '/projects/Academia.webp', alt: 'English academy web application screenshot' },
+    cover: { src: '/projects/Academia.jpg', alt: 'English academy web application screenshot' },
     summary: 'Tailor-made web application to digitalise the day-to-day management of a local English academy.',
     need: 'A local English academy needed to digitalise the management of its activity.',
     idea: 'Address the real business needs of a local company with a tailor-made web application.',
@@ -92,7 +92,7 @@ export const projects = [
   {
     id: 'online-store',
     name: 'Online Store',
-    cover: { src: '/projects/Eccomerce.webp', alt: 'Online store project screenshot' },
+    cover: { src: '/projects/Eccomerce.jpg', alt: 'Online store project screenshot' },
     summary: 'Full-stack e-commerce solution giving a local business its own online sales channel.',
     need: 'Give a local business its own online sales channel.',
     idea: 'Build a full-stack e-commerce solution for a small local business.',
@@ -251,6 +251,7 @@ export const hobbies = {
     { title: 'Marco Aurelio Meditations', cover: 'https://m.media-amazon.com/images/I/81DFDGzHZqL.jpg', alt: 'Cover of Meditations by Marcus Aurelius' },
     { title: 'Los trucos de los ricos', cover: 'https://imagessl8.casadellibro.com/a/l/t5/18/9788423439218.jpg', alt: 'Cover of Los trucos de los ricos' },
     { title: 'The Obstacle Is the Way', cover: 'https://covers.openlibrary.org/b/id/14428233-M.jpg', alt: 'Cover of The Obstacle Is the Way by Ryan Holiday', current: true },
+    { title: 'Greenlights', cover: 'https://covers.openlibrary.org/b/isbn/9780593139134-M.jpg', alt: 'Cover of Greenlights by Matthew McConaughey' },
   ],
   Podcasts: [
     { title: 'Spicy4Tuna', cover: 'https://is1-ssl.mzstatic.com/image/thumb/Podcasts221/v4/0f/2b/d7/0f2bd77d-4309-af4c-12f3-06ea56d28bd3/mza_2881845507794056917.jpg/600x600bb.jpg', alt: 'Spicy4Tuna podcast cover' },
