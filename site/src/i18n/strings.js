@@ -28,7 +28,7 @@ const uiEn = {
   about: { eyebrow: 'About', title: 'About me' },
   projects: {
     eyebrow: 'Projects', title: 'Projects', featured: 'Featured case study',
-    read: 'Read the case study', showLess: 'Show less', stack: 'Stack',
+    stack: 'Stack',
     problem: 'Problem', approach: 'Approach', story: 'Debugging story', results: 'Results',
   },
   experience: { eyebrow: 'Experience', title: 'Experience', month: 'month', months: 'months', seeProject: 'See the project' },
@@ -68,7 +68,7 @@ const uiEs = {
   about: { eyebrow: 'Sobre mí', title: 'Sobre mí' },
   projects: {
     eyebrow: 'Proyectos', title: 'Proyectos', featured: 'Caso de estudio destacado',
-    read: 'Ver el caso de estudio', showLess: 'Ver menos', stack: 'Stack',
+    stack: 'Stack',
     problem: 'Necesidad', approach: 'Enfoque', story: 'Historia de desarrollo', results: 'Resultados',
   },
   experience: { eyebrow: 'Experiencia', title: 'Experiencia', month: 'mes', months: 'meses', seeProject: 'Ver el proyecto' },
