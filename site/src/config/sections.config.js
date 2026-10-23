@@ -12,7 +12,6 @@ import Projects from '../sections/Projects.jsx'
 import Experience from '../sections/Experience.jsx'
 import Studies from '../sections/Studies.jsx'
 import Skills from '../sections/Skills.jsx'
-import Hobbies from '../sections/Hobbies.jsx'
 import Contact from '../sections/Contact.jsx'
 
 export const sections = [
@@ -22,8 +21,7 @@ export const sections = [
   { id: 'experience', navLabel: 'Experience', order: 4, visible: true, Component: Experience },
   { id: 'studies', navLabel: 'Studies', order: 5, visible: true, Component: Studies },
   { id: 'skills', navLabel: 'Skills', order: 6, visible: true, Component: Skills },
-  { id: 'hobbies', navLabel: 'Hobbies', order: 7, visible: true, Component: Hobbies },
-  { id: 'contact', navLabel: 'Contact', order: 8, visible: true, Component: Contact },
+  { id: 'contact', navLabel: 'Contact', order: 7, visible: true, Component: Contact },
 ].sort((a, b) => a.order - b.order)
 
 /* Sections shown in navigation (drives nav links + scrollspy). */

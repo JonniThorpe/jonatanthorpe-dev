@@ -1,4 +1,5 @@
 import Section from '../components/Section.jsx'
+import HobbyMarquee from '../components/HobbyMarquee.jsx'
 import { useLang } from '../i18n/LanguageProvider.jsx'
 import './About.css'
 
@@ -25,6 +26,8 @@ export default function About() {
           <p className="about__note u-mono">{about.note}</p>
         </div>
       </div>
+
+      <HobbyMarquee hobbies={content.hobbies} tagline={ui.hobbies.tagline} kindLabels={ui.hobbies.kinds} />
     </Section>
   )
 }
