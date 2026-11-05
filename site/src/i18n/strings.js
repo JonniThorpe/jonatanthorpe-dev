@@ -45,7 +45,7 @@ const uiEn = {
   },
   contact: {
     eyebrow: 'Contact', title: 'Get in touch',
-    lead: 'Open to remote / international roles. The fastest way to reach me:',
+    lead: 'Open to relocating anywhere in Spain, the EU and the UK. The fastest way to reach me:',
     email: 'Email', linkedin: 'LinkedIn profile', cv: 'Download CV (PDF)',
   },
   actions: {
@@ -85,7 +85,7 @@ const uiEs = {
   },
   contact: {
     eyebrow: 'Contacto', title: 'Ponte en contacto',
-    lead: 'Abierto a puestos remotos / internacionales. La forma más rápida de contactarme:',
+    lead: 'Abierto a reubicarme en cualquier parte de España, la UE y Reino Unido. La forma más rápida de contactarme:',
     email: 'Email', linkedin: 'Perfil de LinkedIn', cv: 'Descargar CV (PDF)',
   },
   actions: {

@@ -14,8 +14,8 @@ import {
 
 export const profile = {
   ...profileEn,
-  role: 'Ingeniero de Software · Full Stack y Machine Learning aplicado',
-  focus: 'Ingeniero backend con experiencia en desarrollo de productos full-stack, con experiencia práctica en fine-tuning de modelos de lenguaje y visión para problemas reales de negocio.',
+  role: 'Ingeniero de Software · IA aplicada',
+  focus: 'Ingeniero backend y full-stack que lleva la IA a productos reales: elegir el modelo adecuado para cada problema de negocio y hacer que funcione de forma eficiente en producción, no solo en una demo.',
   cvUrl: '/cv/CV_Jonatan_Thorpe_Plaza.pdf',
 }
 

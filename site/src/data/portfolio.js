@@ -6,9 +6,9 @@ export const profile = {
   name: 'Jonatan Thorpe Plaza',
   // Navbar brand: shown in full over the hero, folds into "JT" on scroll
   brandName: { first: 'Jonatan', last: 'Thorpe' },
-  role: 'Software Engineer · Applied Full Stack & Machine Learning',
-  focus: 'Backend engineer building full-stack products, with hands-on experience fine-tuning language and vision models for real business problems.',
-  location: 'Alhaurín el Grande, Málaga, Spain',
+  role: 'Software Engineer · Applied AI',
+  focus: 'Backend and full-stack engineer bringing AI into real products: choosing the right model for each business problem and making it run efficiently in production, not just in a demo.',
+  location: 'Málaga, Spain',
   openToRemote: true,
   email: 'jonnithorpe7@gmail.com',
   cvUrl: '/cv/CV_Jonatan_Thorpe_Plaza.pdf',
