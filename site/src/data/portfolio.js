@@ -7,7 +7,7 @@ export const profile = {
   // Navbar brand: shown in full over the hero, folds into "JT" on scroll
   brandName: { first: 'Jonatan', last: 'Thorpe' },
   role: 'Software Engineer · Applied AI',
-  focus: 'Backend and full-stack engineer bringing AI into real products: choosing the right model for each business problem and making it run efficiently in production, not just in a demo.',
+  focus: 'Full-stack engineer bringing AI into real products: choosing the right model for each business problem and making it run efficiently in production. Comfortable working one-to-one with clients to understand their requirements and turn them into working software.',
   location: 'Málaga, Spain',
   openToRemote: true,
   email: 'jonnithorpe7@gmail.com',
