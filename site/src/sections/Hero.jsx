@@ -1,5 +1,6 @@
 import { Download, ArrowDown } from 'lucide-react'
 import { useLang } from '../i18n/LanguageProvider.jsx'
+import PeakNetwork from '../components/PeakNetwork.jsx'
 import './Hero.css'
 
 /* Hero — 5-second read: who, what, open-to-remote, two CTAs.
@@ -12,7 +13,9 @@ export default function Hero() {
 
   return (
     <section id="hero" className="hero" aria-labelledby="hero-title">
-      <div className="hero__bg" aria-hidden="true" />
+      <div className="hero__bg" aria-hidden="true">
+        <PeakNetwork />
+      </div>
       <div className="hero__inner">
         <p className="hero__eyebrow u-mono">{profile.location}</p>
         <h1 id="hero-title" className="hero__role">

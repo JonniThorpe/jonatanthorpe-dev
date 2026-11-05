@@ -67,8 +67,14 @@
   width: 100%;
 }
 
+/* Small pill (same glass as the ghost button) so the location stays legible
+   over the pale sky and the peak network cables crossing behind it */
 .hero__eyebrow {
+  display: inline-block;
   color: var(--color-text);
+  background: color-mix(in srgb, var(--color-bg) 55%, transparent);
+  padding: var(--space-1) var(--space-3);
+  border-radius: 999px;
   margin-bottom: var(--space-4);
 }
 

@@ -1,0 +1,50 @@
+/* Peak network over the hero photo (colours from peak-network.html) */
+.pnet {
+  --pnet-accent: #f08a4b;
+  --pnet-core: #ffe2cc;
+
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+  pointer-events: none;
+}
+
+.pnet__cable,
+.pnet__cable-flow {
+  fill: none;
+  stroke: var(--pnet-accent);
+  stroke-width: 3;
+  stroke-linecap: round;
+}
+.pnet__cable { stroke-opacity: 0.28; }
+.pnet__cable-flow {
+  stroke-opacity: 0.55;
+  stroke-dasharray: 2 26;
+  animation: pnet-flow 3.5s linear infinite;
+}
+@keyframes pnet-flow { to { stroke-dashoffset: -28; } }
+
+.pnet__pulse-glow { fill: none; stroke: var(--pnet-accent); stroke-width: 14; stroke-linecap: round; filter: url(#pnet-glow); }
+.pnet__pulse-core { fill: none; stroke: var(--pnet-core); stroke-width: 4; stroke-linecap: round; }
+
+.pnet__node { fill: var(--pnet-accent); }
+.pnet__node-core { fill: var(--pnet-core); }
+.pnet__halo,
+.pnet__ping {
+  fill: none;
+  stroke: var(--pnet-accent);
+  transform-box: fill-box;
+  transform-origin: center;
+}
+.pnet__halo { stroke-width: 3; animation: pnet-breathe 3.2s ease-in-out infinite; }
+.pnet__ping { stroke-width: 4; }
+@keyframes pnet-breathe {
+  0%, 100% { opacity: 0.15; transform: scale(1); }
+  50% { opacity: 0.5; transform: scale(1.6); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pnet__cable-flow, .pnet__halo { animation: none; }
+}
